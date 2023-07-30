@@ -1,17 +1,15 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom"
-import { ResetPassword, SignIn, SignUp } from "../pages/landing"
-import NotFound from "../pages/not-found/NotFound"
-// import Navbar from "../components/Navbar"
+import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom"
+// import { ResetPassword, SignIn, SignUp } from "../pages/landing"
+import { Home } from "../pages/main"
+import Navbar from "../components/Navbar"
 
 const Routing = () => {
     return (
         <BrowserRouter>
-        {/* <Navbar/> */}
+        <Navbar/>
         <Routes>
-            <Route path='/' element={<SignIn/>} />
-            <Route path='/register' element={<SignUp/>} />
-            <Route path='/reset-password' element={<ResetPassword/>} />
-            <Route path='*' element={<NotFound/>} />
+            <Route path='*' element={ <Navigate to="/home"/>}/>
+            <Route path='/home' element={<Home/>} />
         </Routes>
         </BrowserRouter>
     )
