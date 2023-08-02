@@ -8,7 +8,7 @@ export default {
     extend: {},
   },
   plugins: [
-    require('tailwind-forms'),
+    require("@tailwindcss/forms"),
     require('tailwind-scrollbar-hide')
   ],
 }
