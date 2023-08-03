@@ -6,9 +6,9 @@ const Context = createContext()
 export const SteteContext = ({children}) => {
     const [showModal, setShowModal] = useState(false)
     const [isShowPopup, setIsShowPopup] = useState(false)
-    const [isMobile, setIsMobile] = useState(window.innerWidth <= 885)
+    const [screenView, setScreenView] = useState(innerWidth <= 485 ? 'mobile' : innerWidth > 485 && innerWidth < 886 ? 'tablet' : innerWidth > 885 ? 'desktop' : null)
 return (
-    <Context.Provider value={{showModal,setShowModal,isShowPopup,setIsShowPopup,isMobile,setIsMobile}}>
+    <Context.Provider value={{showModal,setShowModal,isShowPopup,setIsShowPopup,screenView,setScreenView}}>
         {children}
     </Context.Provider>
 )
