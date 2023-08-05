@@ -1,6 +1,5 @@
 import { SteteContext } from "./context/StateContext"
 import Routing from "./routes"
-//tes
 
 const App = () => {
 
