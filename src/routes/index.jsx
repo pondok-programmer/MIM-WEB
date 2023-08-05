@@ -1,7 +1,7 @@
 import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom"
 // import { ResetPassword, SignIn, SignUp } from "../pages/landing"
 import { Home } from "../pages/main"
-import Navbar from "../components/Navbar"
+import { Navbar } from "../components"
 
 const Routing = () => {
     return (
