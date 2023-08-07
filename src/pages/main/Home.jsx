@@ -17,6 +17,15 @@ const Home = () => {
       <Feature2/>
     </section>
     <section>
+      <About/>
+    </section>
+    <section>
+      <About/>
+    </section>
+    <section>
+      <About/>
+    </section>
+    <section>
       <Article/>
     </section>
     <section>
