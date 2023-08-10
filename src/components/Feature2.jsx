@@ -58,7 +58,6 @@ useEffect(() => {
   }
 }, [currSlide])
 
-console.log(currSlide)
 
 const slider = () => 
 {

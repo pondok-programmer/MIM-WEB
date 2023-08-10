@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react"
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io"
 
+
 const Carousel = () => {
     const dataSlider = [{
         url : 'https://images.unsplash.com/photo-1589995635011-078e0bb91d11?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1932&q=80',
@@ -9,11 +10,11 @@ const Carousel = () => {
     },{
         url : 'https://images.unsplash.com/photo-1574246604907-db69e30ddb97?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8bXVzbGltfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60',
         alt : 'img2',
-        title : 'Menghafal Itu',
+        title : 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Tempore harum sed dolore atque cum in, inventore ratione magni temporibus blanditiis!',
     },{
         url : 'https://images.unsplash.com/photo-1574545640323-59dc7a2b4a6d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8bXVzbGltfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60',
         alt : 'img3',
-        title : 'Menghafal',
+        title : 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Tempore harum sed dolore atque cum in',
     },{
         url : 'https://images.unsplash.com/photo-1573939705721-9fa2cdcda901?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjJ8fG11c2xpbXxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60',
         alt : 'img4',
@@ -21,7 +22,7 @@ const Carousel = () => {
     },{
         url : 'https://images.unsplash.com/photo-1589495180659-8bcc1c5d4908?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MzB8fG11c2xpbXxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60',
         alt : 'img5',
-        title : 'Menghafal Itu',                                
+        title : 'Lorem, ipsum dolor sit amet consectetur adipisicing elit.',                                
     }]
 
     const lengt = dataSlider.length - 1;

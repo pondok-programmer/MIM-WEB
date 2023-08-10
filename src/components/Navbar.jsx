@@ -12,7 +12,7 @@ const Navbar = () => {
   const [scrollPx, setScrollPx] = useState(0)
   const [isShowNav, setIsShowNav] = useState(false)
 
-  const {screenView} = useSteteContext()
+  const {screenView,isShowPopup,setIsShowPopup,linkTo} = useSteteContext()
 
   const menuList = [{
     title: 'Beranda',
@@ -214,6 +214,7 @@ const renderMenuNav = () => {
     <>
     {renderMenuNav()}
     {isShowRegister && <Register setIsShow={setIsShowRegister}/>}
+    {isShowPopup && <Popup bgClose={true} btnCancel={true} linkTo={linkTo.join} title={`Simak ${linkTo.title}`} content={<span className='text-center text-[20px]'><p>Yang berlangsung <p>{linkTo.date}</p> Pada pukul {linkTo.time} WIB</p></span>} setIsShow={setIsShowPopup} classnameBtn={'rounded-lg font-[600] hover:bg-[#C58940] transition-all duration-600 text-[#C58940] hover:text-white'}/>}
     </>
   )
 }

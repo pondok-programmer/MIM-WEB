@@ -17,10 +17,10 @@ const Home = () => {
       <Feature2/>
     </section>
     <section>
-      <Article/>
+      <Event/>
     </section>
     <section>
-      <Event/>
+      <Article/>
     </section>
     <section>
       <Download/>
