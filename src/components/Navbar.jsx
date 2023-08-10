@@ -73,7 +73,8 @@ window.addEventListener('scroll', handleScrolling)
 const renderMenuNav = () => {
       if (screenView == 'mobile' || screenView == 'tablet') {
         return <nav 
-                  className={`mobile ${!isOpen && scrollPx == 100 && !isShowNav ? ' -top-80 transition-all ease-in-out duration-500' : 'top-0 transition-all ease-out duration-500'} fixed w-full h-[9vh] md:h-[8vh] fixed px-10 md:px-20 bg-[#E5BA73] bg-opacity-${scrollPx} flex justify-between items-center shadow-[3px_0px_10px_1px_rgba(0,0,0,0.40)] z-50`}
+                  className={`mobile ${!isOpen && scrollPx == 100 && !isShowNav ? ' -top-80 transition-all ease-in-out duration-500' : 'top-0 transition-all ease-out duration-500'} fixed w-full h-[9vh] md:h-[8vh] fixed px-10 md:px-20 flex justify-between items-center shadow-[3px_0px_10px_1px_rgba(0,0,0,0.40)] z-50`}
+                  style={{backgroundColor: `rgba(229,186,115,${scrollPx}%)`}}
                   >
                   {isOpen ? 
                             <span 
@@ -157,7 +158,8 @@ const renderMenuNav = () => {
               </nav>
       } else { 
         return <nav 
-                  className={`desktop ${scrollPx == 100 && !isShowNav ? ' -top-80 transition-all ease-in-out duration-500' : 'top-0 transition-all ease-out duration-500'} w-full h-[10vh] bg-[#E5BA73] bg-opacity-${scrollPx} fixed flex items-center justify-between px-20 z-50`}
+                  className={`desktop ${scrollPx == 100 && !isShowNav ? ' -top-80 transition-all ease-in-out duration-500' : 'top-0 transition-all ease-out duration-500'} w-full h-[10vh] fixed flex items-center justify-between px-20 z-50`}
+                  style={{backgroundColor: `rgba(229,186,115,${scrollPx}%)`}}
                   >
                     <section 
                       className='w-[5vw] bg-slate-200 rounded-full p-2'
