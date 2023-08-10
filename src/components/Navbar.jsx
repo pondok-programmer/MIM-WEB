@@ -66,7 +66,6 @@ const handleScrolling = () => {
     setIsShowNav(true)
   }
   lastScroll = window.scrollY
-  console.log(typeof currScrollPx)
 }
 window.addEventListener('scroll', handleScrolling)
 

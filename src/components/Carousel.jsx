@@ -21,7 +21,7 @@ const Carousel = () => {
     },{
         url : 'https://images.unsplash.com/photo-1589495180659-8bcc1c5d4908?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MzB8fG11c2xpbXxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60',
         alt : 'img5',
-        title : 'Menghafal Itu',
+        title : 'Menghafal Itu',                                
     }]
 
     const lengt = dataSlider.length - 1;
@@ -36,14 +36,14 @@ const Carousel = () => {
 
   return (
     <section className="relative h-[50vh] lg:h-[80vh] w-[100%] overflow-hidden m-auto border-box">
-        {dataSlider.map((data,idx) => {
-            return idx == currIndex && <div key={idx}
+        {dataSlider.map((data,idx) => (
+             idx == currIndex && <div key={idx}
                     className={`w-full relative`}
                     >
                 <img src={data.url} alt={data.alt} className="w-[100%] h-[50vh] lg:h-[80vh] obsolute object-cover"/>
                 <h1 className="absolute top-20 right-10 text-white text-[30px]">{data.title}</h1>
             </div>
-        })}
+        ))}
         <div className="absolute top-0 bottom-0 flex justify-between items-center w-full"><IoIosArrowBack className="text-[28px] text-white bg-slate-500 rounded-l-full opacity-40 hover:opacity-80 cursor-pointer"onClick={()=>setCurrIndex(currIndex < 1 ? lengt : currIndex - 1)}/><IoIosArrowForward className="text-[28px] text-white bg-slate-500 rounded-r-full opacity-40 hover:opacity-80 cursor-pointer"onClick={()=>setCurrIndex(currIndex == lengt ? 0 : currIndex + 1)}/></div>
         <div className='absolute left-0 right-0 bottom-2 z-20 flex justify-center gap-3'>{dataSlider.map((data,idx) => {
                 return <span key={idx} className={`${currIndex == idx ? 'bg-slate-200 h-2 w-2 rounded-full inline-block cursor-pointer' : 'bg-black hover:bg-slate-300 h-2 w-2 rounded-full inline-block cursor-pointer'}`} onClick={()=>setCurrIndex(idx)}></span>
