@@ -1,7 +1,7 @@
 import { useSteteContext } from "../context/StateContext"
 import { ButtonCustom } from "./ui"
 
-const Card = ({img,title,time,date,showPopup,join}) => {
+const EventCard = ({img,title,time,date,showPopup,join}) => {
   const {setLinkTo} = useSteteContext()
   const handleButton = () => {
     showPopup(true)
@@ -24,4 +24,4 @@ const Card = ({img,title,time,date,showPopup,join}) => {
   )
 }
 
-export default Card
+export default EventCard

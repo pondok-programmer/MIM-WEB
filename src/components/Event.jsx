@@ -1,4 +1,4 @@
-import Card from "./Card"
+import EventCard from "./EventCard"
 import img from '../assets/imgs/example.png'
 import { useSteteContext } from "../context/StateContext"
 
@@ -36,7 +36,7 @@ const Event = () => {
       </header>
       <main className="flex justify-center items-center flex-col lg:flex-row flex-wrap gap-10 lg:gap-20 lg:gap-x-40 w-full lg:w-[80%] p-6 overflow-x-scroll scrollbar-hide scroll-smooth md:shadow-[-1px_-10px_10px_rgba(0,0,0,0.6)] md:bg-white z-10">
         {dataKajian.map((data,idx) => (
-          <Card key={idx} img={data.img} title={data.title} time={data.time} date={data.date} showPopup={setIsShowPopup} join={data.join}/>
+          <EventCard key={idx} img={data.img} title={data.title} time={data.time} date={data.date} showPopup={setIsShowPopup} join={data.join}/>
 
         ))}
       </main>

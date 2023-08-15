@@ -216,7 +216,7 @@ const renderMenuNav = () => {
     <>
     {renderMenuNav()}
     {isShowRegister && <Register setIsShow={setIsShowRegister}/>}
-    {isShowPopup && <Popup bgClose={true} btnCancel={true} linkTo={linkTo.join} title={`Simak ${linkTo.title}`} content={<span className='text-center text-[20px]'><p>Yang berlangsung <p>{linkTo.date}</p> Pada pukul {linkTo.time} WIB</p></span>} setIsShow={setIsShowPopup} classnameBtn={'rounded-lg font-[600] hover:bg-[#C58940] transition-all duration-600 text-[#C58940] hover:text-white'}/>}
+    {isShowPopup && <Popup bgClose={true} btnCancel={true} linkTo={linkTo.join} title={`Simak ${linkTo.title}`} content={<span className='text-center text-[20px]'><p>Yang berlangsung<p>{linkTo.date}</p> Pada pukul {linkTo.time} WIB</p></span>} setIsShow={setIsShowPopup} classnameBtn={'rounded-lg font-[600] hover:bg-[#C58940] transition-all duration-600 text-[#C58940] hover:text-white'}/>}
     </>
   )
 }
