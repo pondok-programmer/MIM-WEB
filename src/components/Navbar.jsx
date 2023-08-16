@@ -1,6 +1,6 @@
 import BrandImgShort from '../assets/imgs/logo-mim.png'
 import BrandImgLong from '../assets/imgs/logo-mim-long.png'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { HiMenu } from 'react-icons/hi'
 import { IoIosArrowDown, IoIosClose } from 'react-icons/io'
 import { Popup, Register } from './modal'
@@ -9,8 +9,10 @@ import { useSteteContext } from '../context/StateContext'
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false)
   const [isShowRegister, setIsShowRegister] = useState(false)
+  const [scrollPx, setScrollPx] = useState(0)
+  const [isShowNav, setIsShowNav] = useState(false)
 
-  const {screenView} = useSteteContext()
+  const {screenView,isShowPopup,setIsShowPopup,linkTo} = useSteteContext()
 
   const menuList = [{
     title: 'Beranda',
@@ -48,11 +50,31 @@ const handleClick = (e) => {
   }
 }
 
+let lastScroll = window.scrollY
+const handleScrolling = () => {
+  let currScrollPx = (window.scrollY / 30).toFixed() * 10
+  if (currScrollPx > 100) {
+    setScrollPx(100)
+  } else {
+    setScrollPx(currScrollPx)
+  }
+
+
+  if (lastScroll < window.scrollY ) {
+    setIsShowNav(false)
+  }  else {
+    setIsShowNav(true)
+  }
+  lastScroll = window.scrollY
+}
+window.addEventListener('scroll', handleScrolling)
+
 
 const renderMenuNav = () => {
       if (screenView == 'mobile' || screenView == 'tablet') {
         return <nav 
-                  className='fixed w-full h-[9vh] md:h-[8vh] fixed top-0 px-10 md:px-20 bg-[#E5BA73]/0 flex justify-between items-center shadow-[3px_0px_10px_1px_rgba(0,0,0,0.40)] z-50'
+                  className={`mobile ${!isOpen && scrollPx == 100 && !isShowNav ? ' -top-80 transition-all ease-in-out duration-500' : 'top-0 transition-all ease-out duration-500'} fixed w-full h-[9vh] md:h-[8vh] fixed px-10 md:px-20 flex justify-between items-center shadow-[3px_0px_10px_1px_rgba(0,0,0,0.40)] z-50`}
+                  style={{backgroundColor: `rgba(229,186,115,${scrollPx}%)`}}
                   >
                   {isOpen ? 
                             <span 
@@ -84,7 +106,7 @@ const renderMenuNav = () => {
                                                                 
                 <>
                   <aside 
-                    className={`absolute h-screen w-[49%] ${isOpen ? 'translate-x-[0px] duration-300 transiton-all ease-in-out' : 'translate-x-[-500px] duration-500 transiton-all ease-in'} flex flex-col justify-between items-center pt-2 md:pt-4 pb-10 md:pb-20 top-0 left-0 bg-[#E5BA73] shadow-[3px_0px_10px_1px_rgba(0,0,0,0.40)] z-50`}
+                    className={`absolute h-screen w-[49%] ${isOpen ? 'translate-x-[0px] duration-300 transiton-all ease-in-out' : 'translate-x-[-500px] duration-500 transiton-all ease-in'} flex flex-col justify-between items-center pt-2 md:pt-4 pb-10 md:pb-20 top-0 left-0 bg-[#E5BA73] shadow-[3px_0px_10px_1px_rgba(0,0,0,0.40)] z-50 overflow-hidden`}
                   >
                     <span 
                       className='bg-slate-300 w-10 md:w-[65px] h-10 md:h-[65px] rounded-full self-start ml-10 md:ml-20 flex justify-center items-center cursor-pointer' 
@@ -136,7 +158,8 @@ const renderMenuNav = () => {
               </nav>
       } else { 
         return <nav 
-                  className='w-full h-[10vh] bg-[#E5BA73]/0 fixed flex items-center justify-between px-20 z-50'
+                  className={`desktop ${scrollPx == 100 && !isShowNav ? ' -top-80 transition-all ease-in-out duration-500' : 'top-0 transition-all ease-out duration-500'} w-full h-[10vh] fixed flex items-center justify-between px-20 z-50`}
+                  style={{backgroundColor: `rgba(229,186,115,${scrollPx}%)`}}
                   >
                     <section 
                       className='w-[5vw] bg-slate-200 rounded-full p-2'
@@ -193,6 +216,7 @@ const renderMenuNav = () => {
     <>
     {renderMenuNav()}
     {isShowRegister && <Register setIsShow={setIsShowRegister}/>}
+    {isShowPopup && <Popup bgClose={true} btnCancel={true} linkTo={linkTo.join} title={`Simak ${linkTo.title}`} content={<span className='text-center text-[20px]'><p>Yang berlangsung<p>{linkTo.date}</p> Pada pukul {linkTo.time} WIB</p></span>} setIsShow={setIsShowPopup} classnameBtn={'rounded-lg font-[600] hover:bg-[#C58940] transition-all duration-600 text-[#C58940] hover:text-white'}/>}
     </>
   )
 }

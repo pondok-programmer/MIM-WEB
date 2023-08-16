@@ -7,24 +7,51 @@ import { SlClose } from 'react-icons/sl'
 const Register = ({setIsShow}) => {
   const {screenView} = useSteteContext()
   const [slide, setSlide] = useState(1)
+  const [isHaveChildren, setIsHaveChildren] = useState(false)
+  const [fullName, setFullName] = useState('')
+  const [birthOfPlace, setBirthOfPlace] = useState('')
+  const [dateOfBirth, setDateOfBirth] = useState('')
+  const [job, setJob] = useState('')
+  const [numberOfChildren, setNumberOfChildren] = useState(isHaveChildren && 0)
+  const [email, setEmail] = useState('')
+  const [phoneNumber, setPhoneNumber] = useState('')
+  const [password, setPassword] = useState('')
+  const [passwordConfirmation, setPasswordConfirmation] = useState('')
+  const [status, setStatus] = useState('')
+  const [collage, setCollage] = useState('selectOptionCollage')
+
+console.log(status,collage)
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    console.log(fullName,birthOfPlace,dateOfBirth,job,numberOfChildren,email,phoneNumber,password,passwordConfirmation)
+  }
 
   const renderSlide = () => {
     if(slide == 1) {
       return <>
       <h1 className='text-[25px] lg:text-[20px] mt-8 lg:mt-0 text-white font-bold'>Informasi Pribadi</h1>
       <InputCustom 
+            type='text'
             placeholder={'Nama lengkap anda'} 
             classNameDiv={'border-2 rounded-full'} 
+            value={fullName}
+            eventOnChange={(e)=>setFullName(e.target.value)}
             className={'border-none placeholder:text-white text-white focus:ring-0 py-3 lg:py-2 w-full text-[18px]'}
             />
       <InputCustom 
+            type='text'
             placeholder={'Tempat lahir'} 
             classNameDiv={'border-2 rounded-full'} 
+            value={birthOfPlace}
+            eventOnChange={(e)=>setBirthOfPlace(e.target.value)}
             className={'border-none placeholder:text-white text-white focus:ring-0 py-3 lg:py-2 w-full text-[18px]'}
             />
       <InputCustom 
+            type='text'
             placeholder={'Tanggal lahir'} 
             classNameDiv={'border-2 rounded-full'} 
+            value={dateOfBirth}
+            eventOnChange={(e)=>setDateOfBirth(e.target.value)}
             className={'border-none placeholder:text-white text-white focus:ring-0 py-3 lg:py-2 w-full text-[18px]'}
             />
       <span className='flex justify-around'>
@@ -37,8 +64,10 @@ const Register = ({setIsShow}) => {
             name="status" 
             id="status" 
             className='bg-[#D9D9D9] rounded-full border-none text-white cursor-pointer py-3 lg:py-2'
+            value={status}
+            onChange={(e)=>setStatus(e.target.value)}
             >
-          <option selected disabled value="Status">Status</option>
+          <option value="Status" selected={true} disabled>Status</option>
           <option value="Menikah">Menikah</option>
           <option value="Lajang">Lajang</option>
           <option value="Bercerai">Bercerai</option></select>
@@ -48,8 +77,9 @@ const Register = ({setIsShow}) => {
               name="pendidikan" 
               id="pendidikan" 
               className='bg-[#D9D9D9] rounded-full border-none text-white cursor-pointer py-3 lg:py-2'
-              >
-          <option selected disabled value="Pendidikan">Pendidikan</option>
+              value={collage}
+              onChange={(e)=>setCollage(e.target.value)}>
+          <option value="selectOptionCollage" disabled>Pendidikan</option>
           <option value="TK">TK</option>
           <option value="SD/Sederajat">SD</option>
           <option value="SMP/Sederajat">SMP/MTs/Sederajat</option>
@@ -65,17 +95,24 @@ const Register = ({setIsShow}) => {
         </span>
       </div>
       <InputCustom 
+          type='text'
           placeholder={'Pekerjaan'} 
           classNameDiv={'border-2 rounded-full'} 
           className={'border-none placeholder:text-white text-white focus:ring-0 py-3 lg:py-2 w-full text-[18px]'}
+          value={job}
+          eventOnChange={(e)=>setJob(e.target.value)}
           />
       <InputCustom 
           type='number' 
           placeholder={'Jumlah Anak'} 
           classNameDiv={'border-2 rounded-full'} 
           className={'border-none placeholder:text-white text-white focus:ring-0 py-3 lg:py-2 w-full text-[18px]'}
+          value={numberOfChildren}
+          eventOnChange={(e)=>setNumberOfChildren(e.target.value)}
+          disabled={isHaveChildren}
           />
       <ButtonCustom 
+          type='button'
           value={'SELANJUTNYA'} 
           className={'bg-[#D9D9D9] py-3 lg:py-2 mt-10 lg:mt-2 text-white font-bold rounded-full'} 
           eventOnClick={()=>setSlide(2)}
@@ -85,6 +122,7 @@ const Register = ({setIsShow}) => {
       return <>
         <span className='flex gap-x-12'>
           <ButtonCustom 
+              type='button'
               className={'w-min h-min py-2 lg:py-1 px-3 rounded-l-full text-white bg-slate-400'} 
               value={'Kembali'} 
               eventOnClick={()=>setSlide(1)}
@@ -96,24 +134,35 @@ const Register = ({setIsShow}) => {
             placeholder={'Masukan email anda'} 
             classNameDiv={'border-2 rounded-full py-2 lg:py-0'} 
             className={'text-[19px] text-white placeholder:text-white w-full focus:ring-0 border-none'}
+            value={email}
+            eventOnChange={(e)=>setEmail(e.target.value)}
             />
         <InputCustom 
-            type='number' classNameDiv={'border-2 rounded-full py-2 lg:py-0'} className={'text-[19px] text-white placeholder:text-white w-full focus:ring-0 border-none'} 
+            type='number' 
+            classNameDiv={'border-2 rounded-full py-2 lg:py-0'} 
+            className={'text-[19px] text-white placeholder:text-white w-full focus:ring-0 border-none'} 
             placeholder={'Masukan nomor telephone anda'}
+            value={phoneNumber}
+            eventOnChange={(e)=>setPhoneNumber(e.target.value)}
             />
         <InputCustom 
             type='password' 
             classNameDiv={'border-2 rounded-full py-2 md:pr-5 lg:pr-3 lg:py-0'} 
             className={'text-[19px] text-white placeholder:text-white w-full focus:ring-0 border-none'} 
             placeholder={'Kata sandi'}
+            value={password}
+            eventOnChange={(e)=>setPassword(e.target.value)}
             />
         <InputCustom 
             type='password' 
             classNameDiv={'border-2 rounded-full py-2 md:pr-5 lg:pr-3 lg:py-0'} 
             className={'text-[19px] text-white placeholder:text-white w-full focus:ring-0 border-none'} 
             placeholder={'Konfirmasi kata sandi'}
+            value={passwordConfirmation}
+            eventOnChange={(e)=>setPasswordConfirmation(e.target.value)}
             />
         <ButtonCustom 
+            type='submit'
             value={'MENDAFTAR'} 
             className={'bg-[#D9D9D9] font-bold text-white py-4 lg:py-2 mt-20 rounded-full'}
             />
@@ -139,7 +188,9 @@ const Register = ({setIsShow}) => {
               />
             </span>
             <form 
-              className='w-full md:w-[65vw] lg:w-[25vw] flex flex-col gap-5 md:m-10 lg:m-0 lg:mr-10 '>
+              className='w-full md:w-[65vw] lg:w-[25vw] flex flex-col gap-5 md:m-10 lg:m-0 lg:mr-10 '
+              onSubmit={(e)=>handleSubmit(e)}
+              >
             {renderSlide()}
             </form>
         </section>

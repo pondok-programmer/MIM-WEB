@@ -14,12 +14,12 @@ const Popup = ({title,content,btnCancel,bgClose,classnameBtn,setIsShow,linkTo}) 
         <Link to={linkTo}>
           <ButtonCustom
                 value={'OK'} 
-                className={`${classnameBtn} border-[1.9px] border-cyan-700 py-1 md:py-2 px-3 md:px-4 text-[17px] md:text-[24px]`}/>
+                className={`${classnameBtn} border-[1.9px] border-[#C58940] py-1 md:py-2 px-3 md:px-4 text-[23px] md:text-[28px]`}/>
         </Link>
         {btnCancel && 
                   <ButtonCustom 
                       value={'Cancel'} 
-                      className={`${classnameBtn} border-[1.9px] border-cyan-700 py-1 md:py-2 px-3 md:px-4 text-[17px] md:text-[24px]`} 
+                      className={`${classnameBtn} border-[1.9px] border-[#C58940] py-1 md:py-2 px-3 md:px-4 text-[23px] md:text-[28px]`} 
                       eventOnClick={()=>setIsShow(false)} />}
        </span>
     </section>
