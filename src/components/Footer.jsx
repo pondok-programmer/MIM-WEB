@@ -9,7 +9,7 @@ import { BiLogoFacebookCircle, BiLogoGmail, BiLogoInstagram, BiLogoWhatsapp, BiL
 
 const Footer = () => {
   return (
-    <footer className="flex flex-col justify-end gap-y-3 w-full h-[60vh] bg-gradient-to-t from-[#FAEAB1] from-20% to-[#FFFFFF] to-80% border-2 text-[#AD7B3E]">
+    <footer className="flex flex-col justify-end gap-y-3 w-full h-[60vh] bg-gradient-to-t from-[#FAEAB1] from-20% to-[#FFFFFF] to-80% text-[#AD7B3E]">
       <div>
         <section className="flex items-center">
           <header className='flex-[1] mx-4'><h1 className='text-bold text-[18px]'>Partnership</h1></header>

@@ -8,7 +8,7 @@ const Download = () => {
       <header className='self-end w-[40%] bottom-0 mt-10'>
         <img src={example} alt="" className='w-[110px] object-cover'/>
       </header>
-      <main className='w-[55%] border-2'>
+      <main className='w-[55%]'>
         <h1 className='text-[21px] text-[#AD7B3E] font-bold'>Download Aplikasi Dan Bergabung Sekarang Juga!</h1>
         <div className='flex justify-around w-[300px] gap-10 mt-5'>
           <img src={playstore} alt="Playstore" />
