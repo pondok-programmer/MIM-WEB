@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { BsEyeSlash, BsEye } from 'react-icons/bs'
 
-const InputCustom = ({type = 'text',placeholder,id,name,value,labelFor,labelValue,className,classNameDiv,icon}) => {
+const InputCustom = ({type = 'text',placeholder,id,name,value,eventOnChange,disabled,labelFor,labelValue,className,classNameDiv,icon}) => {
     const [isShow, setIsShow] = useState(false)
     const showError = false
   return (
@@ -33,8 +33,10 @@ const InputCustom = ({type = 'text',placeholder,id,name,value,labelFor,labelValu
                                 min='0' 
                                 name={name} 
                                 value={value} 
+                                onChange={eventOnChange}
                                 placeholder={placeholder} 
                                 className={`${className} bg-transparent text-[#999]`} 
+                                disabled={disabled}
                                 />
                                 <label 
                                 htmlFor={labelFor} 
