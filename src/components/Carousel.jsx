@@ -52,8 +52,8 @@ const Carousel = () => {
             </div>
         ))}
         <div className="absolute top-0 bottom-0 flex justify-between items-center w-full z-30"><IoIosArrowBack className="text-[28px] text-white bg-slate-500 rounded-l-full opacity-40 hover:opacity-80 cursor-pointer"onClick={()=>setCurrIndex(currIndex < 1 ? lengt : currIndex - 1)}/><IoIosArrowForward className="text-[28px] text-white bg-slate-500 rounded-r-full opacity-40 hover:opacity-80 cursor-pointer"onClick={()=>setCurrIndex(currIndex == lengt ? 0 : currIndex + 1)}/></div>
-        <div className='absolute left-0 right-0 bottom-2 z-20 flex justify-center gap-3'>{dataSlider.map((data,idx) => {
-                return <span key={idx} className={`${currIndex == idx ? 'bg-slate-200 h-2 w-2 rounded-full inline-block cursor-pointer' : 'bg-black hover:bg-slate-300 h-2 w-2 rounded-full inline-block cursor-pointer'}`} onClick={()=>setCurrIndex(idx)}></span>
+        <div className='absolute left-0 right-0 bottom-2 z-30 flex justify-center gap-3'>{dataSlider.map((data,idx) => {
+                return <span key={idx} className={`${currIndex == idx ? 'bg-slate-100 h-2 w-2 rounded-full inline-block cursor-pointer' : 'bg-slate-400 hover:bg-slate-200 h-2 w-2 rounded-full inline-block cursor-pointer'}`} onClick={()=>setCurrIndex(idx)}></span>
         })}</div>
     </section>
   )
