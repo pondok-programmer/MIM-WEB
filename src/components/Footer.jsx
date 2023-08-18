@@ -44,7 +44,7 @@ const Footer = () => {
       </section>
       </div>
       <span className='text-center text-[18px] md:text-[20px] font-[600] mb-5 md:absolute md:bottom-0'>
-        <hr className='mx-auto w-80 lg:w-[60vw] mb-5 bg-[#AD7B3E]' />
+        <hr className='mx-auto w-80 md:w-[50vw] lg:w-[60vw] h-[2px] lg:h-[2.7px] mb-5 bg-[#AD7B3E]' />
         &copy; 2023 MIM | All Rights Reserved.
       </span>
     </footer>
