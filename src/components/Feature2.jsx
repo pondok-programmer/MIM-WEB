@@ -81,7 +81,7 @@ const slider = () =>
 }
 
   return (
-    <section className='my-10 overflow-hidden'>
+    <section className='my-10 lg:mt-3 lg:mb-10 overflow-hidden'>
       <header className='text-end pr-4 lg:px-20'>
         <h2 className='text-[22px] md:text-[30px] text-[#E5BA73]'>Fitur Lainnya</h2>
       </header>

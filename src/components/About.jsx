@@ -3,7 +3,7 @@ import brandMIM from '../assets/imgs/logo-mim-bg.png'
 
 const About = () => {
   return (
-    <section className="text-[#C58940] my-10 bg-no-repeat bg-[center_top_20vh] md:bg-center bg-[length:340px_80px] md:bg-[length:590px_180px] lg:bg-[length:690px_220px] drop-shadow-lg" style={{backgroundImage :`url(${brandMIM})`}}>
+    <section className="text-[#C58940] my-10 lg:mt-40 bg-no-repeat bg-[center_top_20vh] md:bg-center bg-[length:340px_80px] md:bg-[length:590px_180px] lg:bg-[length:690px_220px] drop-shadow-lg" style={{backgroundImage :`url(${brandMIM})`}}>
         <header className="text-center"><h1 className="text-[26px] md:text-[28px] font-bold mb-2">Apa Itu MIM ?</h1></header>
         <article className="border-t-2 md:border-l-2 border-tl-2 border-slate-400 md:mx-10 rounded-lg md:flex">
           <section className="leading-7 p-4 md:w-[55%] bg-cover">

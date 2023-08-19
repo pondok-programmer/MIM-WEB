@@ -34,7 +34,7 @@ const Event = () => {
       <header className="bg-[#FAEAB1] w-fit p-[7.9px] md:p-3 md:px-6 rounded-br-2xl rounded-tl-2xl shadow-[0px_-8px_1px_#AD7B3E]">
         <h1 className="text-[20px] md:text-[28px] text-[#E5BA73] font-bold">Kajian SIDAQ</h1>
       </header>
-      <main className="flex justify-center items-center flex-col lg:flex-row flex-wrap gap-10 lg:gap-20 lg:gap-x-40 w-full lg:w-[80%] p-6 overflow-x-scroll scrollbar-hide scroll-smooth md:shadow-[-1px_-10px_10px_rgba(0,0,0,0.6)] md:bg-white z-10">
+      <main className="flex justify-center items-center flex-col lg:flex-row flex-wrap gap-10 lg:gap-20 lg:gap-x-40 w-full lg:w-[80%] p-6 overflow-x-scroll scrollbar-hide scroll-smooth md:shadow-[-1px_-10px_10px_rgba(0,0,0,0.6)] md:bg-[#FAF8F1] z-10">
         {dataKajian.map((data,idx) => (
           <EventCard key={idx} img={data.img} title={data.title} time={data.time} date={data.date} showPopup={setIsShowPopup} join={data.join}/>
 

@@ -10,7 +10,7 @@ import { Link } from 'react-router-dom'
 
 const Footer = () => {
   return (
-    <footer className="flex flex-col md:flex-row justify-end gap-y-3 md:gap-10 lg:gap-0 w-full h-[55vh] bg-gradient-to-t from-[#FAEAB1] from-30% to-[#FFFFFF] to-80% text-[#AD7B3E] md:relative md:justify-center">
+    <footer className="flex flex-col md:flex-row justify-end gap-y-3 md:gap-10 lg:gap-0 w-full h-[55vh] bg-gradient-to-t from-[#FAEAB1] from-30% to-transparent to-80% text-[#AD7B3E] md:relative md:justify-center">
       <div className='md-flex-[1] lg:flex-[2] md:w-fit md:h-fit md:mb-20 md:self-end'>
         <section className="flex items-center md:flex-col lg:flex-row md:w-fit md:h-[30vh] lg:pl-10">
           <header className='flex-[1] mx-4 lg:-mt-20'><h1 className='text-bold text-[18px] md:text-[24px] italic'>Partnership</h1></header>
