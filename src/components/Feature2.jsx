@@ -2,6 +2,9 @@ import { useEffect, useState } from 'react'
 import feature1 from '../assets/imgs/SVG1.svg'
 import feature2 from '../assets/imgs/SVG2.svg'
 import feature3 from '../assets/imgs/SVG3.svg'
+import { useSteteContext } from '../context/StateContext'
+import { ButtonCustom } from './ui'
+import { LuArrowBigDownDash } from 'react-icons/lu'
 
 
 const Feature2 = () => {
@@ -48,6 +51,8 @@ const Feature2 = () => {
     id: 8
   }]
 const [currSlide, setCurrSlide] = useState(1)
+const {fitur2} = useSteteContext()
+
 useEffect(() => {
   const autoSlide = setInterval(() => {
     setCurrSlide(currSlide => (currSlide + 1) % dataFeatures.length)
@@ -81,9 +86,10 @@ const slider = () =>
 }
 
   return (
-    <section className='my-10 lg:mt-3 lg:mb-10 overflow-hidden'>
-      <header className='text-end pr-4 lg:px-20'>
-        <h2 className='text-[22px] md:text-[30px] text-[#E5BA73]'>Fitur Lainnya</h2>
+    <section ref={fitur2} className='my-10 lg:mt-3 lg:mb-10 overflow-hidden'>
+      <header className='w-full h-10 md:h-20 pt-1 pr-4 lg:px-40 flex justify-center gap-x-10'>
+        <h2 className='text-[22px] md:text-[30px] w-fit order-2 text-[#E5BA73] cursor-pointer' onClick={()=>fitur2.current?.scrollIntoView({behavior: 'smooth'})}>Fitur Lainnya</h2>
+        <ButtonCustom className={'animate-bounce w-[3vw]'} value={<LuArrowBigDownDash className='text-[40px] lg:text-[50px] text-[#E5BA73]'/>} eventOnClick={()=>fitur2.current?.scrollIntoView({behavior: 'smooth'})}/>
       </header>
       <section className={`w-fit h-[80vh] transition-all duration-700 ease-in-out flex flex-row justify-center items-center ${slider()}`}>
     {dataFeatures.map( data => (

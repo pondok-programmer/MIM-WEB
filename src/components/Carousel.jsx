@@ -31,29 +31,39 @@ const Carousel = () => {
 
     const lengt = dataSlider.length - 1;
     const [currIndex, setCurrIndex] = useState(0)
-    const {screenView} = useSteteContext()
+    const {screenView,beranda} = useSteteContext()
     
     useEffect(()=>{
         const autoSlide = setInterval(()=>{
             setCurrIndex(currIndex == lengt ? 0 : currIndex + 1)
-        },14000)
+        },7000)
         return () => clearInterval(autoSlide)
     },[currIndex])
 
   return (
     <>
-    <section className="relative h-[50vh] lg:h-[85vh] w-[100%] overflow-hidden m-auto before:w-full before:h-full before:absolute before:bg-gradient-to-t before:from-black/40 before:from-1% before:via-transparent before:to-black/40 before:to-1% before:z-10">
+    <section ref={beranda} className="relative h-[50vh] lg:h-[85vh] w-[100%] overflow-hidden m-auto before:w-full before:h-full before:absolute before:bg-gradient-to-t before:from-black/40 before:from-1% before:via-transparent before:to-black/40 before:to-1% before:z-10">
         {dataSlider.map((data,idx) => (
              idx == currIndex && <div key={idx}
                     className={`w-full relative`}
                     >
                 <img src={data.url} alt={data.alt} className="w-[100%] h-[50vh] lg:h-[89vh] obsolute object-cover"/>
-                <h1 className="absolute top-[200px] md:top-[250px] right-10 md:flex md:right-0 md:left-0 lg:left-[30vw] text-white text-[22px] md:text-[39px] font-bold z-20"><TypeAnimation style={{
-    maxHeight: '450px',
-    maxWidth: '650px',
+                <h1 className="absolute top-[200px] md:top-[20vh] lg:top-[35vh] right-10 md:flex md:right-0 md:left-0 lg:left-[30vw] text-white text-[22px] md:text-[39px] font-bold z-20"><TypeAnimation style={screenView == 'mobile' ? {
+    height: '250px',
+    width: '320px',
     display: 'block',
     margin: 'auto'
-  }} sequence={[`${data.title}`]} speed={50} cursor={false}/></h1>
+  } : screenView == 'tablet' ? {
+    height: '350px',
+    width: '500px',
+    display: 'block',
+    margin: 'auto'
+  } : screenView == 'desktop' ? {
+    height: '450px',
+    width: '650px',
+    display: 'block',
+    margin: 'auto'
+  } : null} sequence={[`${data.title}`]} speed={50} cursor={false}/></h1>
             </div>
         ))}
         <div className="absolute top-0 bottom-0 flex justify-between items-center w-full z-30"><IoIosArrowBack className="text-[28px] md:text-[38px] lg:text-[44px] text-white bg-slate-500 rounded-l-full opacity-40 hover:opacity-80 cursor-pointer"onClick={()=>setCurrIndex(currIndex < 1 ? lengt : currIndex - 1)}/><IoIosArrowForward className="text-[28px] md:text-[38px] lg:text-[44px] text-white bg-slate-500 rounded-r-full opacity-40 hover:opacity-80 cursor-pointer"onClick={()=>setCurrIndex(currIndex == lengt ? 0 : currIndex + 1)}/></div>

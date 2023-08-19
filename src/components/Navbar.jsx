@@ -1,6 +1,6 @@
 import BrandImgShort from '../assets/imgs/logo-mim.png'
 import BrandImgLong from '../assets/imgs/logo-mim-long.png'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { HiMenu } from 'react-icons/hi'
 import { IoIosArrowDown, IoIosClose } from 'react-icons/io'
 import { Popup, Register } from './modal'
@@ -11,20 +11,21 @@ const Navbar = () => {
   const [isShowRegister, setIsShowRegister] = useState(false)
   const [scrollPx, setScrollPx] = useState(0)
   const [isShowNav, setIsShowNav] = useState(false)
+  
 
-  const {screenView,isShowPopup,setIsShowPopup,linkTo} = useSteteContext()
+  const {screenView,isShowPopup,setIsShowPopup,linkTo,beranda,tentang,fitur,kajian,artikel} = useSteteContext()
 
   const menuList = [{
     title: 'Beranda',
-    event: 'alert("beranda")',
+    event: 'beranda',
     path: '#'
   },{
     title: 'Tentang MIM',
-    event: 'alert("tentang")',
+    event: 'tentang',
     path: '#about-us'
   },{
     title: 'Fitur',
-    event: 'alert("fitur")',
+    event: 'fitur',
     path: '#feature'
   },{
     title: 'Informasi',
@@ -32,10 +33,12 @@ const Navbar = () => {
     icon : <IoIosArrowDown className='text-[21px] md:text-[32px] lg:text-[27px]'/>,
     submenu: [{
       title: 'Info Kajian',
-      path: '#kajian-info'
+      path: '#kajian-info',
+      event: 'kajian'
     },{
       title: 'Artikel Dakwah',
-      path: '#dakwah-article'
+      path: '#dakwah-article',
+      event: 'artikel'
     }]
   },{
     title: 'Bergabung',
@@ -47,7 +50,18 @@ const handleClick = (e) => {
   if(e == 'join'){
     setIsShowRegister(true)
     setIsOpen(!isOpen)
+  } else if(e == 'beranda'){
+    beranda.current?.scrollIntoView({behavior: 'smooth'})
+  } else if(e == 'tentang'){
+    tentang.current?.scrollIntoView({behavior: 'smooth'})
+  }else if(e == 'fitur'){
+    fitur.current?.scrollIntoView({behavior: 'smooth'})
+  } else if(e == 'kajian'){
+    kajian.current?.scrollIntoView({behavior: 'smooth'})
+  } else if(e == 'artikel'){
+    artikel.current?.scrollIntoView({behavior: 'smooth'})
   }
+  console.log(e)
 }
 
 let lastScroll = window.scrollY
@@ -138,7 +152,7 @@ const renderMenuNav = () => {
                                                                     return <span 
                                                                                 key={sub.title} 
                                                                                 className='text-[18px] md:text-[30px] hover:bg-slate-200 block w-full' 
-                                                                                onClick={()=>alert('yes')}
+                                                                                onClick={()=>handleClick(sub.event)}
                                                                                 >
                                                                                   {sub.title}
                                                                             </span>
@@ -194,7 +208,7 @@ const renderMenuNav = () => {
                                                                                     return <span 
                                                                                               key={sub.title} 
                                                                                               className='text-[20px] p-2 hover:bg-slate-200 block w-full' 
-                                                                                              onClick={()=>alert('yes')}
+                                                                                              onClick={()=>handleClick(sub.event)}
                                                                                               >
                                                                                                 {sub.title}
                                                                                               </span>

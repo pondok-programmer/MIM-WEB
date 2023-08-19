@@ -1,6 +1,7 @@
 import EventCard from "./EventCard"
 import img from '../assets/imgs/example.png'
 import { useSteteContext } from "../context/StateContext"
+import { forwardRef } from "react"
 
 const Event = () => {
   const dataKajian = [{
@@ -28,9 +29,9 @@ const Event = () => {
     time: '22:00 - 23:30',
     join: 'https://www.youtube.com'
   },]
-  const {setIsShowPopup} = useSteteContext()
+  const {setIsShowPopup,kajian} = useSteteContext()
   return (
-    <section className="flex flex-col -mt-[150px] md:-mt-60 lg:-mt-[400px] h-screen md:h-[80vh] lg:h-[95vh] md:gap-y-20 w-full items-center justify-center lg:px-4 ">
+    <section ref={kajian} className="flex flex-col -mt-[150px] md:-mt-60 lg:-mt-[400px] h-screen md:h-[80vh] lg:h-[95vh] md:gap-y-20 w-full items-center justify-center lg:px-4 ">
       <header className="bg-[#FAEAB1] w-fit p-[7.9px] md:p-3 md:px-6 rounded-br-2xl rounded-tl-2xl shadow-[0px_-8px_1px_#AD7B3E]">
         <h1 className="text-[20px] md:text-[28px] text-[#E5BA73] font-bold">Kajian SIDAQ</h1>
       </header>

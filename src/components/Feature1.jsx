@@ -6,7 +6,8 @@ import homeFeature from '../assets/imgs/home-screen.png'
 import svg1 from '../assets/imgs/SVG1.svg'
 import svg2 from '../assets/imgs/SVG2.svg'
 import svg3 from '../assets/imgs/SVG3.svg'
-import { useState } from 'react'
+import { forwardRef, useState } from 'react'
+import { useSteteContext } from '../context/StateContext'
 
 const Feature1 = () => {
 const dataFeature = [{
@@ -34,6 +35,7 @@ const dataFeature = [{
   gif: svg2,
   id: 4
 }]
+const {fitur} = useSteteContext()
 const [isActive, setIsActive] = useState(false)
 const [playVid, setPlayVid] = useState(false)
 const handleClick = id => {
@@ -41,7 +43,7 @@ const handleClick = id => {
   setPlayVid(id)
 }
   return (
-    <section className="relative md:mt-40">
+    <section ref={fitur} className="relative md:mt-40">
       <header className="text-center text-[#C58940]">
         <h1 className="text-[26px] md:text-[28px] font-bold mb-2">Fitur - Fitur</h1>
       </header> 
