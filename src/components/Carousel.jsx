@@ -84,14 +84,14 @@ const Carousel = () => {
             </div>
         ))}
         <div className="absolute top-0 bottom-0 flex justify-between items-center w-full z-30"><IoIosArrowBack className="text-[28px] md:text-[38px] lg:text-[44px] text-white bg-slate-500 rounded-l-full opacity-40 hover:opacity-80 cursor-pointer"onClick={prevSlide}/><IoIosArrowForward className="text-[28px] md:text-[38px] lg:text-[44px] text-white bg-slate-500 rounded-r-full opacity-40 hover:opacity-80 cursor-pointer"onClick={nextSlide}/></div>
-        <div className='absolute left-0 right-0 bottom-2 z-30 flex justify-center gap-3'>{dataSlider.map((idx) => {
-                return <span key={idx} className={`${currIndex == idx ? 'bg-slate-100 h-2 w-2 rounded-full inline-block cursor-pointer' : 'bg-slate-400 hover:bg-slate-200 h-2 w-2 rounded-full inline-block cursor-pointer'}`} onClick={()=>setCurrIndex(idx)}></span>
+        <div className='absolute left-0 right-0 bottom-2 z-30 flex justify-center gap-3'>{dataSlider.map((data,idx) => {
+                return <span key={idx} className={`${currIndex == idx ? 'bg-slate-200 h-2 w-2 rounded-full inline-block cursor-pointer' : 'bg-slate-400 hover:bg-slate-200 h-2 w-2 rounded-full inline-block cursor-pointer'}`} onClick={()=>setCurrIndex(idx)}></span>
         })}</div>
         {screenView == 'desktop' && <div className="w-full h-full absolute -bottom-[38vh] z-10">
             <img src={overlay} alt="OverLay" className="w-full h-full"/>
         </div>}
     </section>
-        {screenView == 'desktop' && <img data-aos="fade-right" src={deviceHP} alt="Smartphone" className="lg:w-[18vw] lg:h-[65vh] z-20 absolute lg:left-[20vw] lg:bottom-0"/>}
+        {screenView == 'desktop' && <img data-aos="fade-up" src={deviceHP} alt="Smartphone" className="lg:w-[18vw] lg:h-[65vh] z-20 absolute lg:left-[20vw] lg:bottom-0"/>}
   </>)
 }
 
