@@ -6,7 +6,7 @@ import homeFeature from '../assets/imgs/home-screen.png'
 import svg1 from '../assets/imgs/SVG1.svg'
 import svg2 from '../assets/imgs/SVG2.svg'
 import svg3 from '../assets/imgs/SVG3.svg'
-import { forwardRef, useState } from 'react'
+import { useState } from 'react'
 import { useSteteContext } from '../context/StateContext'
 
 const Feature1 = () => {
@@ -44,13 +44,13 @@ const handleClick = id => {
 }
   return (
     <section ref={fitur} className="relative md:mt-40">
-      <header className="text-center text-[#C58940]">
+      <header data-aos="fade-up" className="text-center text-[#C58940]">
         <h1 className="text-[26px] md:text-[28px] font-bold mb-2">Fitur - Fitur</h1>
       </header> 
       <main>
         <article>
         <h2 className='text-[22px] text-white bg-[#FAEAB1] md:bg-transparent p-1 rounded-t-lg md:rounded-t-none md:absolute md:m-auto md:-left-[2.5vw] lg:left-[11vw] md:top-0 md:bottom-0 h-fit w-fit md:rotate-[-90deg] md:text-[30px] z-40'>Fitur Utama</h2>
-          <section className='relative flex gap-1 md:gap-5 px-5 md:pl-10 md:mx-[40px] lg:mx-[185px] md:rounded-xl bg-gradient-to-r from-[#FAEAB1] to-[#FFFFFF] shadow-[inset_0px_0px_10px_rgba(0,0,0,0.6)]'>
+          <section data-aos="zoom-in-left" className='relative flex gap-1 md:gap-5 px-5 md:pl-10 md:mx-[40px] lg:mx-[185px] md:rounded-xl bg-gradient-to-r from-[#FAEAB1] to-[#FFFFFF] shadow-[inset_0px_0px_10px_rgba(0,0,0,0.6)]'>
               {dataFeature.map((data,id)=> (
             <div key={data.id} onClick={()=>handleClick(id)} className={`relative ${isActive == id ? 'h-[75vh] lg:h-[80vh] flex-[1.1] md:flex-[3.3] lg:flex-[1.5]' : 'h-[75vh] lg:h-[80vh] flex-[0.1] md:flex-[0.9] lg:flex-[0.9]'} flex items-center justify-center mx-auto transition-[flex] duration-700 ease-out-flex cursor-pointer`}>
                 {playVid == id ? (<><img src={data.img} alt={data.title} className='absolute w-full h-full object-cover'/>

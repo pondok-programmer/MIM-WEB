@@ -10,7 +10,7 @@ const Article = () => {
             <img src={backImg} alt="Background Image" className='absolute bottom-0 my-auto top-0 -z-10'/>
         </header>
         <main>
-            <span><h3 className='mt-4 mb-8 md:ml-8 lg:mt-8 font-[500] md:text-[18px]'><Link to={'/home'}>Home</Link> / <span className='underline text-[#E5BA73]'>Tantangan SIDAQ</span></h3></span>
+            <span><h3 className='mt-4 mb-8 md:ml-8 lg:mt-8 font-[500] md:text-[18px]'><Link to={'/home'}>Home</Link> / <span className='underline text-[#E5BA73]'>{title}</span></h3></span>
             <section className='p-1 md:mx-20 md:px-20 lg:mx-60 bg-white'>
                 <header className='md:pt-10 lg:pt-8'>
                     <img src={heroImg} alt="/" className='w-full object-cover h-[40vh] md:h-[35vh] lg:h-[50vh]'/>

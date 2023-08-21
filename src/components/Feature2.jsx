@@ -87,9 +87,9 @@ const slider = () =>
 
   return (
     <section ref={fitur2} className='my-10 lg:mt-3 lg:mb-10 overflow-hidden'>
-      <header className='w-full h-10 md:h-20 pt-1 pr-4 lg:px-40 flex justify-center gap-x-10'>
+      <header className='w-full h-10 md:h-20 pt-1 pr-4 lg:px-40 flex justify-center gap-x-11 md:gap-x-14'>
         <h2 className='text-[22px] md:text-[30px] w-fit order-2 text-[#E5BA73] cursor-pointer' onClick={()=>fitur2.current?.scrollIntoView({behavior: 'smooth'})}>Fitur Lainnya</h2>
-        <ButtonCustom className={'animate-bounce w-[3vw]'} value={<LuArrowBigDownDash className='text-[40px] lg:text-[50px] text-[#E5BA73]'/>} eventOnClick={()=>fitur2.current?.scrollIntoView({behavior: 'smooth'})}/>
+        <ButtonCustom className={'animate-bounce w-[1vw]'} value={<LuArrowBigDownDash className='text-[40px] md:text-[50px] text-[#E5BA73]'/>} eventOnClick={()=>fitur2.current?.scrollIntoView({behavior: 'smooth'})}/>
       </header>
       <section className={`w-fit h-[80vh] transition-all duration-700 ease-in-out flex flex-row justify-center items-center ${slider()}`}>
     {dataFeatures.map( data => (

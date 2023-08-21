@@ -35,6 +35,7 @@ const Carousel = () => {
     
     
     useEffect(()=>{
+
         beranda.current?.addEventListener('animationend', () => {
             beranda.current?.classList.remove('flashFx')
         })
@@ -64,7 +65,7 @@ const Carousel = () => {
                     className={`w-full relative`}
                     >
                 <img src={data.url} alt={data.alt} className="w-[100%] h-[50vh] lg:h-[89vh] obsolute object-cover"/>
-                <h1 className="absolute top-[200px] md:top-[20vh] lg:top-[35vh] right-10 md:flex md:right-0 md:left-0 lg:left-[30vw] text-white text-[22px] md:text-[39px] font-bold z-20"><TypeAnimation style={screenView == 'mobile' ? {
+                <h1 data-aos="fade-left" className="absolute top-[200px] md:top-[20vh] lg:top-[35vh] right-10 md:flex md:right-0 md:left-0 lg:left-[30vw] text-white text-[22px] md:text-[39px] font-bold drop-shadow-[0px_0px_7px_#C58940] z-20"><TypeAnimation style={screenView == 'mobile' ? {
     height: '250px',
     width: '320px',
     display: 'block',
@@ -90,7 +91,7 @@ const Carousel = () => {
             <img src={overlay} alt="OverLay" className="w-full h-full"/>
         </div>}
     </section>
-        {screenView == 'desktop' && <img src={deviceHP} alt="Smartphone" className="lg:w-[18vw] lg:h-[65vh] z-20 absolute lg:left-[20vw] lg:bottom-0"/>}
+        {screenView == 'desktop' && <img data-aos="fade-right" src={deviceHP} alt="Smartphone" className="lg:w-[18vw] lg:h-[65vh] z-20 absolute lg:left-[20vw] lg:bottom-0"/>}
   </>)
 }
 

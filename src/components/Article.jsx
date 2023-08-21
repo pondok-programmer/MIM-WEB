@@ -30,10 +30,10 @@ const Article = () => {
       </span>
       <span></span>
       <section className="flex flex-col bg-[#E5BA73] relative h-[88vh] md:h-[77vh] lg:h-[55vh] items-center justify-center ">
-      <header className="w-fit absolute -top-3 p-2 -mt-10 md:-mt-14 md:p-3 md:px-6 rounded-t-lg border-t-4 border-r-4 border-l-4">
+      <header data-aos="fade-out" className="w-fit absolute -top-3 p-2 -mt-10 md:-mt-14 md:p-3 md:px-6 rounded-t-lg border-t-4 border-r-4 border-l-4">
         <h1 className="text-[20px] md:text-[28px] text-white font-bold">Artikel Dakwah</h1>
       </header>
-      <main className="flex md:justify-center items-center flex-col flex-wrap gap-5 lg:gap-10 lg:gap-x-20 w-full lg:w-full p-5 overflow-x-scroll scrollbar-hide scroll-smooth shadow-[inset_0px_5px_5px_rgba(0,0,0,0.3)] z-10">
+      <main data-aos="slide-up" className="flex md:justify-center items-center flex-col flex-wrap gap-5 lg:gap-10 lg:gap-x-20 w-full lg:w-full p-5 overflow-x-scroll scrollbar-hide scroll-smooth shadow-[inset_0px_5px_5px_rgba(0,0,0,0.3)] z-10">
         {dataArtikel.map(data => (
           <ArticleCard key={data.id} img={data.img} title={data.title} path={data.title}/>
         ))}
