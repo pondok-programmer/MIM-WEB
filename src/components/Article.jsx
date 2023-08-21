@@ -35,7 +35,7 @@ const Article = () => {
       </header>
       <main className="flex md:justify-center items-center flex-col flex-wrap gap-5 lg:gap-10 lg:gap-x-20 w-full lg:w-full p-5 overflow-x-scroll scrollbar-hide scroll-smooth shadow-[inset_0px_5px_5px_rgba(0,0,0,0.3)] z-10">
         {dataArtikel.map(data => (
-          <ArticleCard key={data.id} img={data.img} title={data.title}/>
+          <ArticleCard key={data.id} img={data.img} title={data.title} path={data.title}/>
         ))}
       </main>
 
