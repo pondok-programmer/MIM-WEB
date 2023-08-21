@@ -11,7 +11,7 @@ const Popup = ({title,content,btnCancel,bgClose,classnameBtn,setIsShow,linkTo}) 
       {content}
     </section>
       <span className='flex gap-x-5'>
-        <Link to={linkTo}>
+        <Link to={linkTo} target='_blank'>
           <ButtonCustom
                 value={'OK'} 
                 className={`${classnameBtn} border-[1.9px] border-[#C58940] py-1 md:py-2 px-3 md:px-4 text-[23px] md:text-[28px]`}/>
