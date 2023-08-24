@@ -58,9 +58,9 @@ const {screenView,fitur2} = useSteteContext()
 
   return (
     <section ref={fitur2} className='my-10 lg:mt-3 lg:mb-10 overflow-hidden'>
-      <header className='w-full h-10 md:h-20 pt-1 pr-4 lg:px-40 flex justify-center gap-x-11 md:gap-x-14'>
+      <header className='w-full h-fit pt-1 pr-4 lg:px-40 flex justify-center gap-x-2 md:gap-x-4'>
         <h2 className='text-[22px] md:text-[30px] w-fit order-2 text-[#E5BA73] cursor-pointer' onClick={()=>fitur2.current?.scrollIntoView({behavior: 'smooth'})}>Fitur Lainnya</h2>
-        <ButtonCustom className={'animate-bounce w-[20px]'} value={<LuArrowBigDownDash className='text-[40px] md:text-[50px] text-[#E5BA73]'/>} eventOnClick={()=>fitur2.current?.scrollIntoView({behavior: 'smooth'})}/>
+        <LuArrowBigDownDash className='text-[40px] md:text-[50px] text-[#E5BA73] mt-1 md:mt-2 animate-bounce' onClick={()=>fitur2.current?.scrollIntoView({behavior: 'smooth'})}/>
       </header>
       <section>
 
@@ -68,7 +68,7 @@ const {screenView,fitur2} = useSteteContext()
       modules={[Autoplay]}
       spaceBetween={90}
       slidesPerView={screenView == 'mobile' ? 1 : screenView == 'tablet' ? 2 : screenView == 'desktop' && 3}
-      onSlideChange={() => console.log('slide change')}
+      onSlideChange={(currSlide) => setCurrSlide(currSlide.realIndex)}
       centeredSlides={true}
       loop={true}
       autoplay={{delay: 800}}
@@ -76,11 +76,11 @@ const {screenView,fitur2} = useSteteContext()
     >
         {dataFeatures.map((data,idx) => (
           <SwiperSlide key={idx}>
-              <div className='relative mt-10 items-center w-[280px] ml-[17vw] md:ml-[7vw] lg:ml-[4vw] drop-shadow-[0px_0px_10px_rgba(0,0,0,0.6)] pb-5'>
+              <div className='relative mt-10 items-center w-[280px] ml-[20vw] md:ml-[7vw] lg:ml-[3.4vw] drop-shadow-[0px_0px_10px_rgba(0,0,0,0.6)] pb-5'>
                 <img src={data.img} className='w-full h-[75vh]'/>
-                <span className='absolute bottom-5 rounded-2xl flex w-full justify-center items-center bg-slate-300/60 flex-col'>
+                {currSlide == idx && <span className='absolute bottom-5 rounded-2xl flex w-full justify-center items-center bg-slate-300/60 flex-col'>
                 <h2 className='text-[15px] self-start my-3 border-b-2'>{data.title}</h2>
-                <p className='text-[13px] p-2'>{data.description}</p></span>
+                <p className='text-[13px] p-2'>{data.description}</p></span>}
               </div>
           </SwiperSlide>
         ))}

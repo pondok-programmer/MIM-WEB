@@ -22,7 +22,7 @@ const SignIn = () => {
               <span className='text-[13px] md:text-[21px] text-[#008C74] mr-1'>
                 <Link to={'reset-password'}>Forgot Password?</Link>
               </span></div>
-              <Link to={'main'}><ButtonCustom value={'Sign In'} className={'bg-[#008C74] rounded-[20px] text-[15px] md:text-[20px] lg:text-[23px] text-white font-[700] my-5 py-2 px-3 md:py-3'}/></Link>
+              <Link to={'dashboard'}><ButtonCustom value={'Sign In'} className={'bg-[#008C74] rounded-[20px] text-[15px] md:text-[20px] lg:text-[23px] text-white font-[700] my-5 py-2 px-3 md:py-3'}/></Link>
               <div className='h-[1.7px] w-full flex justify-center relative bg-[#008C74] before:absolute before:content-["OR"] before:bg-white before:text-[12px] before:w-10 before:-top-[10px] before:font-[600]'></div>
             <Link to={'/register'}><ButtonCustom value={'Sign Up'} className={'border-[#008C74] border-2 text-[15px] md:text-[20px] lg:text-[23px] bg-white rounded-[20px] text-[#008C74] font-[700] my-5 py-2 px-3 md:py-3'}/></Link>
             </form>

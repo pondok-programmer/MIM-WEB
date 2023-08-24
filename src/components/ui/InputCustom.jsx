@@ -13,6 +13,8 @@ const InputCustom = ({type = 'text',placeholder,id,name,value,eventOnChange,disa
                                   <input 
                                     type={isShow ? 'text' : 'password'} 
                                     placeholder={placeholder} 
+                                    value={value} 
+                                    onChange={eventOnChange}
                                     className={`${className} bg-transparent text-[#999]`} 
                                     />
                                       {isShow ? 

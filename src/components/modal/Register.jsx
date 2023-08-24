@@ -2,169 +2,265 @@ import { useState } from 'react'
 import heroImg from '../../assets/imgs/example.png'
 import { ButtonCustom, InputCustom } from '../ui'
 import { useSteteContext } from '../../context/StateContext'
+import instance from '../../services/api/api'
 import { SlClose } from 'react-icons/sl'
+import Select from 'react-select'
+import axios from 'axios'
 
 const Register = ({setIsShow}) => {
-  const {screenView} = useSteteContext()
+  const {screenView,setIsShowPopupAfterSignUp} = useSteteContext()
   const [slide, setSlide] = useState(1)
+  // const [gender, setGender] = useState('')
   const [isHaveChildren, setIsHaveChildren] = useState(false)
-  const [fullName, setFullName] = useState('')
-  const [birthOfPlace, setBirthOfPlace] = useState('')
-  const [dateOfBirth, setDateOfBirth] = useState('')
-  const [job, setJob] = useState('')
-  const [numberOfChildren, setNumberOfChildren] = useState(isHaveChildren && 0)
-  const [email, setEmail] = useState('')
-  const [phoneNumber, setPhoneNumber] = useState('')
-  const [password, setPassword] = useState('')
-  const [passwordConfirmation, setPasswordConfirmation] = useState('')
-  const [status, setStatus] = useState('')
-  const [collage, setCollage] = useState('selectOptionCollage')
+  const [formData,setFormData] = useState({
+    fullName: '',
+    placeOfBirth: '',
+    dateOfBirth: null,
+    gender: '',
+    address: '',
+    status: '',
+    collage: '',
+    income: '',
+    job: '',
+    numberOfChildren: '',
+    phoneNumber: '',
+    email: '',
+    password: '',
+    passwordConfirmation: '',
+  })
 
-console.log(status,collage)
+  const optionCollage = [{value: 'TK', label: 'TK'
+  },{
+    value: 'SD/Sederajat', label: 'SD/Sederajat'
+  },{
+    value: 'SMP/MTS/Sederajat', label: 'SMP/MTS/Sederajat'
+  },{
+    value: 'SMA/SMK/Sederajat', label: 'SMA/SMK/Sederajat'
+  },{
+    value: 'Kuliah', label: 'Kuliah'
+  },{
+    value: 'Tidak Sekolah', label: 'Tidak Sekolah'
+  }]
+  const optionStatus = [{
+    value: 'Lajang', label: 'Lajang'
+  },{
+    value: 'Menikah', label: 'Menikah'
+  },{
+    value: 'Bercerai', label: 'Bercerai'
+  }]
+
   const handleSubmit = (e) => {
     e.preventDefault()
-    console.log(fullName,birthOfPlace,dateOfBirth,job,numberOfChildren,email,phoneNumber,password,passwordConfirmation)
+
+// const fs = require('fs');
+let data = new FormData();
+data.append('name', formData.fullName);
+data.append('tgl_lahir', formData.dateOfBirth);
+data.append('tempat_lahir',formData. placeOfBirth);
+data.append('jenkel', formData.gender);
+data.append('alamat', formData.address);
+data.append('no_telp', formData.phoneNumber);
+data.append('email', formData.email);
+data.append('pendidikan', formData.collage);
+data.append('pekerjaan', formData.job);
+data.append('range_gaji', formData.income);
+data.append('status', formData.status);
+data.append('jumlah_anak', formData.numberOfChildren);
+// data.append('img', fs.createReadStream('/home/miko/Pictures/walpp/2.jpg'));
+data.append('password', formData.password);
+data.append('password_confirmation', formData.passwordConfirmation);
+
+let config = {
+  method: 'post',
+  maxBodyLength: Infinity,
+  url: '/register',
+  headers: {},
+  data : data
+};
+
+instance
+.request(config)
+.then((response) => {
+  // console.log(response);
+  if(response.data.error === true){
+    if(response.data.error == 'email'){
+      alert('Email sudah terdaftar!')
+    } else if(response.data.error == 'tgl_lahir'){
+      alert('Format tanggal lahir harus |tahun-bulan-tanggal|')
+    } else if(response.data.error == 'no_telp'){
+      alert('Nomor telepon sudah terdaftar!')
+    }
+    else {
+      alert('Gagal membuat akun')
+    }
+    alert('error')
+    console.log(response.data.message)
+  } else {
+  setIsShowPopupAfterSignUp(true)
+  setIsShow(false)
+  }
+})
+.catch((error) => {
+  console.log(error);
+});
   }
 
   const renderSlide = () => {
     if(slide == 1) {
       return <>
-      <h1 className='text-[25px] lg:text-[20px] mt-8 lg:mt-0 text-white font-bold'>Informasi Pribadi</h1>
       <InputCustom 
             type='text'
             placeholder={'Nama lengkap anda'} 
             classNameDiv={'border-2 rounded-full'} 
-            value={fullName}
-            eventOnChange={(e)=>setFullName(e.target.value)}
+            value={formData.fullName}
+            eventOnChange={(e)=>setFormData({...formData, fullName : e.target.value})}
             className={'border-none placeholder:text-white text-white focus:ring-0 py-3 lg:py-2 w-full text-[18px]'}
             />
       <InputCustom 
             type='text'
             placeholder={'Tempat lahir'} 
             classNameDiv={'border-2 rounded-full'} 
-            value={birthOfPlace}
-            eventOnChange={(e)=>setBirthOfPlace(e.target.value)}
+            value={formData.placeOfBirth}
+            eventOnChange={(e)=>setFormData({...formData, placeOfBirth : e.target.value})}
             className={'border-none placeholder:text-white text-white focus:ring-0 py-3 lg:py-2 w-full text-[18px]'}
             />
       <InputCustom 
             type='text'
             placeholder={'Tanggal lahir'} 
             classNameDiv={'border-2 rounded-full'} 
-            value={dateOfBirth}
-            eventOnChange={(e)=>setDateOfBirth(e.target.value)}
+            value={formData.dateOfBirth}
+            eventOnChange={(e)=>setFormData({...formData, dateOfBirth : e.target.value})}
             className={'border-none placeholder:text-white text-white focus:ring-0 py-3 lg:py-2 w-full text-[18px]'}
             />
       <span className='flex justify-around'>
-        <InputCustom type='radio' classNameDiv={'w-fit border-2 px-3 py-[11px] lg:py-[6px] rounded-full flex gap-4 font-[600] text-white text-[18px] lg:text-[16px] cursor-pointer'} name={'gender'} id={'akhwat'} labelFor={'akhwat'} labelValue={'Akhwat'}/>
-        <InputCustom type='radio' classNameDiv={'w-fit border-2 px-3 py-[11px] lg:py-[6px] rounded-full flex gap-4 font-[600] text-white text-[18px] lg:text-[16px] cursor-pointer'} name={'gender'} id={'ikhwan'} labelFor={'ikhwan'} labelValue={'Ikhwan'}/>
+        <InputCustom type='radio' eventOnChange={(e)=>setFormData({...formData, gender : e.target.value})} classNameDiv={'w-fit border-2 px-3 py-[11px] lg:py-[6px] rounded-full flex gap-4 font-[600] text-white text-[18px] lg:text-[16px] cursor-pointer'} name={'gender'} id={'laki-laki'} value={'Laki-laki'} labelFor={'laki-laki'} labelValue={'Laki - laki'}/>
+        <InputCustom type='radio' eventOnChange={(e)=>setFormData({...formData, gender : e.target.value})} classNameDiv={'w-fit border-2 px-3 py-[11px] lg:py-[6px] rounded-full flex gap-4 font-[600] text-white text-[18px] lg:text-[16px] cursor-pointer'} name={'gender'} id={'perempuan'} value={'Perempuan'} labelFor={'perempuan'} labelValue={'Perempuan'}/>
       </span>
+      <textarea value={formData.address} placeholder='Alamat lengkap' onChange={(e)=>setFormData({...formData, address : e.target.value})} className='bg-transparent border-2 border-white rounded-full py-10 text-[18px] text-white placeholder:text-white'></textarea>
       <div className='flex justify-around'>
         <span>
-          <select 
-            name="status" 
-            id="status" 
-            className='bg-[#D9D9D9] rounded-full border-none text-white cursor-pointer py-3 lg:py-2'
-            value={status}
-            onChange={(e)=>setStatus(e.target.value)}
-            >
-          <option value="Status" selected={true} disabled>Status</option>
-          <option value="Menikah">Menikah</option>
-          <option value="Lajang">Lajang</option>
-          <option value="Bercerai">Bercerai</option></select>
+          <Select styles={{
+        control: (provided) => ({
+            ...provided,
+            backgroundColor: 'transparent',
+            border: '1.7px solid white',
+            borderRadius: '50px',
+            padding: '6px 20px',
+            boxShadow: 'none'
+        }),
+        singleValue: (provided) => ({
+          ...provided,
+          color: 'white',
+          fontSize: '18px'
+        }),
+        placeholder: (provided) => ({
+            ...provided,
+            color: 'white',
+        }),
+        dropdownIndicator: (provided) => ({
+            ...provided,
+            color: 'white',
+        }),
+    }}
+    value={formData.status ? { value: formData.status, label: formData.status } : null} onChange={(e)=>{setFormData({...formData, status: e.value})
+          setIsHaveChildren(e.value == 'lajang' ? true : false)}} isSearchable={false} placeholder={'Status'} options={optionStatus}/>
         </span>
         <span>
-          <select 
-              name="pendidikan" 
-              id="pendidikan" 
-              className='bg-[#D9D9D9] rounded-full border-none text-white cursor-pointer py-3 lg:py-2'
-              value={collage}
-              onChange={(e)=>setCollage(e.target.value)}>
-          <option value="selectOptionCollage" disabled>Pendidikan</option>
-          <option value="TK">TK</option>
-          <option value="SD/Sederajat">SD</option>
-          <option value="SMP/Sederajat">SMP/MTs/Sederajat</option>
-          <option value="SMA/Sederajat">SMA/SMK/Sederajat</option>
-          <option value="D1">D1</option>
-          <option value="D2">D2</option>
-          <option value="D3">D3</option>
-          <option value="S1">S1</option>
-          <option value="S2">S2</option>
-          <option value="S3">S3</option>
-          <option value="Tidak sekolah">Tidak sekolah</option>
-          </select>
+          <Select styles={{
+        control: (provided) => ({
+            ...provided,
+            backgroundColor: 'transparent',
+            border: '1.7px solid white',
+            borderRadius: '50px',
+            padding: '6px 20px',
+            boxShadow: 'none'
+        }),
+        singleValue: (provided) => ({
+          ...provided,
+          color: 'white',
+          fontSize: '18px'
+        }),
+        placeholder: (provided) => ({
+            ...provided,
+            color: 'white',
+        }),
+        dropdownIndicator: (provided) => ({
+            ...provided,
+            color: 'white',
+        }),
+    }} value={formData.collage ? { value: formData.collage, label: formData.collage } : null} onChange={(e)=>setFormData({...formData, collage: e.value})} isSearchable={false} placeholder="Pendidikan" options={optionCollage}/>
         </span>
       </div>
-      <InputCustom 
-          type='text'
-          placeholder={'Pekerjaan'} 
-          classNameDiv={'border-2 rounded-full'} 
-          className={'border-none placeholder:text-white text-white focus:ring-0 py-3 lg:py-2 w-full text-[18px]'}
-          value={job}
-          eventOnChange={(e)=>setJob(e.target.value)}
-          />
       <InputCustom 
           type='number' 
           placeholder={'Jumlah Anak'} 
           classNameDiv={'border-2 rounded-full'} 
           className={'border-none placeholder:text-white text-white focus:ring-0 py-3 lg:py-2 w-full text-[18px]'}
-          value={numberOfChildren}
-          eventOnChange={(e)=>setNumberOfChildren(e.target.value)}
+          value={formData.numberOfChildren}
+          eventOnChange={(e)=>setFormData({...formData, numberOfChildren: isHaveChildren ? 0 : e.target.value})}
           disabled={isHaveChildren}
+          />
+      <InputCustom 
+          type='text'
+          placeholder={'Pekerjaan'} 
+          classNameDiv={'border-2 rounded-full'} 
+          className={'border-none placeholder:text-white text-white focus:ring-0 py-3 lg:py-2 w-full text-[18px]'}
+          value={formData.job}
+          eventOnChange={(e)=>setFormData({...formData, job : e.target.value})}
+          />
+      <InputCustom 
+          type='text'
+          placeholder={'Range gaji'} 
+          classNameDiv={'border-2 rounded-full'} 
+          className={'border-none placeholder:text-white text-white focus:ring-0 py-3 lg:py-2 w-full text-[18px]'}
+          value={formData.income}
+          eventOnChange={(e)=>setFormData({...formData, income : e.target.value})}
           />
       <ButtonCustom 
           type='button'
           value={'SELANJUTNYA'} 
-          className={'bg-[#D9D9D9] py-3 lg:py-2 mt-10 lg:mt-2 text-white font-bold rounded-full'} 
+          className={'bg-[#D9D9D9] py-3 lg:py-2 mt-10 mb-5 lg:mt-2 text-white font-bold rounded-full'} 
           eventOnClick={()=>setSlide(2)}
           />
           </>
     } else if (slide == 2) {
       return <>
-        <span className='flex gap-x-12'>
-          <ButtonCustom 
-              type='button'
-              className={'w-min h-min py-2 lg:py-1 px-3 rounded-l-full text-white bg-slate-400'} 
-              value={'Kembali'} 
-              eventOnClick={()=>setSlide(1)}
-              />
-          <h1 className='text-[25px] lg:text-[20px] font-bold text-white'>Buat Akun</h1>
-        </span>
         <InputCustom 
             type='email' 
             placeholder={'Masukan email anda'} 
-            classNameDiv={'border-2 rounded-full py-2 lg:py-0'} 
+            classNameDiv={'border-2 rounded-full py-1 lg:py-0'} 
             className={'text-[19px] text-white placeholder:text-white w-full focus:ring-0 border-none'}
-            value={email}
-            eventOnChange={(e)=>setEmail(e.target.value)}
+            value={formData.email}
+            eventOnChange={(e)=>setFormData({...formData, email : e.target.value})}
             />
         <InputCustom 
             type='number' 
-            classNameDiv={'border-2 rounded-full py-2 lg:py-0'} 
+            classNameDiv={'border-2 rounded-full py-1 lg:py-0'} 
             className={'text-[19px] text-white placeholder:text-white w-full focus:ring-0 border-none'} 
             placeholder={'Masukan nomor telephone anda'}
-            value={phoneNumber}
-            eventOnChange={(e)=>setPhoneNumber(e.target.value)}
+            value={formData.phoneNumber}
+            eventOnChange={(e)=>setFormData({...formData, phoneNumber : e.target.value})}
             />
         <InputCustom 
             type='password' 
-            classNameDiv={'border-2 rounded-full py-2 md:pr-5 lg:pr-3 lg:py-0'} 
+            classNameDiv={'border-2 rounded-full py-1 md:pr-5 lg:pr-3 lg:py-0'} 
             className={'text-[19px] text-white placeholder:text-white w-full focus:ring-0 border-none'} 
             placeholder={'Kata sandi'}
-            value={password}
-            eventOnChange={(e)=>setPassword(e.target.value)}
+            value={formData.password}
+            eventOnChange={(e)=>setFormData({...formData, password: e.target.value})}
             />
         <InputCustom 
             type='password' 
-            classNameDiv={'border-2 rounded-full py-2 md:pr-5 lg:pr-3 lg:py-0'} 
+            classNameDiv={'border-2 rounded-full py-1 md:pr-5 lg:pr-3 lg:py-0'} 
             className={'text-[19px] text-white placeholder:text-white w-full focus:ring-0 border-none'} 
             placeholder={'Konfirmasi kata sandi'}
-            value={passwordConfirmation}
-            eventOnChange={(e)=>setPasswordConfirmation(e.target.value)}
+            value={formData.passwordConfirmation}
+            eventOnChange={(e)=>setFormData({...formData, passwordConfirmation: e.target.value})}
             />
         <ButtonCustom 
             type='submit'
             value={'MENDAFTAR'} 
-            className={'bg-[#D9D9D9] font-bold text-white py-4 lg:py-2 mt-20 rounded-full'}
+            className={'bg-[#D9D9D9] font-bold text-white py-3 lg:py-1 mt-20 rounded-full'}
             />
         <p className='text-white pl-4'>Dengan mendaftar nda menyetujui syarat dan kebijakan yang dibuat oleh pondok</p>
         </>
@@ -174,10 +270,10 @@ console.log(status,collage)
   return (
     <div className='fixed top-0 w-full z-50'>
         <section 
-          className='bg-[#FAF8F1]/40 backdrop-blur-sm p-3 pb-10 md:p-0 md:pb-0 w-full md:w-fit md:h-fit overflow-hidden flex flex-col md:flex-row md:justify-evenly md:gap-10 justify-center items-center absolute top-0 bottom-0 left-0 right-0 m-auto rounded-xl z-50'>
+          className='bg-[#FAF8F1]/40 backdrop-blur-sm p-3 pb-0 w-full md:w-fit md:h-fit overflow-hidden flex flex-col md:flex-row md:justify-evenly md:gap-10 justify-center items-center absolute top-0 bottom-0 left-0 right-0 m-auto rounded-xl z-50'>
             {screenView == 'desktop' && 
             <header 
-              className='relative w-[40vw] bg-white py-10'>
+              className='relative w-[40vw] bg-white py-1'>
                 <img src={heroImg} alt="Hero" className=''/>
                 <h1 className='absolute top-0 bottom-0 flex justify-center items-center mx-auto left-0 right-0'></h1>
             </header>}
@@ -187,8 +283,18 @@ console.log(status,collage)
               className='text-[30px] md:text-[35px]'
               />
             </span>
+              {slide == 1 ? <h1 className='text-[25px] lg:text-[20px] text-white font-bold'>Informasi Pribadi</h1> : 
+        <span className='flex gap-x-12 items-center -mt-5 mb-4 self-start'>
+          <ButtonCustom 
+              type='button'
+              className={'w-min h-min py-1 px-3 rounded-l-full text-white bg-slate-400'} 
+              value={'Kembali'} 
+              eventOnClick={()=>setSlide(1)}
+              />
+          <h1 className='text-[25px] lg:text-[20px] font-bold text-white'>Buat Akun</h1>
+        </span>}
             <form 
-              className='w-full md:w-[65vw] lg:w-[25vw] flex flex-col gap-5 md:m-10 lg:m-0 lg:mr-10 '
+              className='w-full md:w-[65vw] lg:w-[25vw] flex flex-col gap-5 md:m-10 lg:m-0 lg:mr-10 overflow-y-auto'
               onSubmit={(e)=>handleSubmit(e)}
               >
             {renderSlide()}

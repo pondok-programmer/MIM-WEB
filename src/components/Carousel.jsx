@@ -85,7 +85,9 @@ const Carousel = () => {
         ))}
         <div className="absolute top-0 bottom-0 flex justify-between items-center w-full z-30"><IoIosArrowBack className="text-[28px] md:text-[38px] lg:text-[44px] text-white bg-slate-500 rounded-l-full opacity-40 hover:opacity-80 cursor-pointer"onClick={prevSlide}/><IoIosArrowForward className="text-[28px] md:text-[38px] lg:text-[44px] text-white bg-slate-500 rounded-r-full opacity-40 hover:opacity-80 cursor-pointer"onClick={nextSlide}/></div>
         <div className='absolute left-0 right-0 bottom-2 z-30 flex justify-center gap-3'>{dataSlider.map((data,idx) => {
-                return <span key={idx} className={`${currIndex == idx ? 'bg-slate-200 h-2 w-2 rounded-full inline-block cursor-pointer' : 'bg-slate-400 hover:bg-slate-200 h-2 w-2 rounded-full inline-block cursor-pointer'}`} onClick={()=>setCurrIndex(idx)}></span>
+                return <span key={idx} className={`${currIndex == idx ? 'bg-slate-200 h-2 w-2 rounded-full inline-block cursor-pointer' : 'bg-slate-400 hover:bg-slate-200 h-2 w-2 rounded-full inline-block cursor-pointer'}`} onClick={()=>{
+                    setCurrIndex(idx)
+                    beranda.current?.classList.add('flashFx')}}></span>
         })}</div>
         {screenView == 'desktop' && <div className="w-full h-full absolute -bottom-[38vh] z-10">
             <img src={overlay} alt="OverLay" className="w-full h-full"/>
