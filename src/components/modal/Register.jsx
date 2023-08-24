@@ -5,17 +5,19 @@ import { useSteteContext } from '../../context/StateContext'
 import instance from '../../services/api/api'
 import { SlClose } from 'react-icons/sl'
 import Select from 'react-select'
-import axios from 'axios'
+import Datepicker from 'react-tailwindcss-datepicker'
 
 const Register = ({setIsShow}) => {
   const {screenView,setIsShowPopupAfterSignUp} = useSteteContext()
   const [slide, setSlide] = useState(1)
-  // const [gender, setGender] = useState('')
   const [isHaveChildren, setIsHaveChildren] = useState(false)
+  const [value, setValue] = useState({ 
+    startDate: null
+    });
   const [formData,setFormData] = useState({
     fullName: '',
     placeOfBirth: '',
-    dateOfBirth: null,
+    dateOfBirth:  '',
     gender: '',
     address: '',
     status: '',
@@ -51,60 +53,58 @@ const Register = ({setIsShow}) => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
+    
+    let data = new FormData();
+    data.append('name', formData.fullName);
+    data.append('tgl_lahir', formData.dateOfBirth);
+    data.append('tempat_lahir',formData.placeOfBirth);
+    data.append('jenkel', formData.gender);
+    data.append('alamat', formData.address);
+    data.append('no_telp', formData.phoneNumber);
+    data.append('email', formData.email);
+    data.append('pendidikan', formData.collage);
+    data.append('pekerjaan', formData.job);
+    data.append('range_gaji', formData.income);
+    data.append('status', formData.status);
+    data.append('jumlah_anak', formData.numberOfChildren);
+    data.append('password', formData.password);
+    data.append('password_confirmation', formData.passwordConfirmation);
 
-// const fs = require('fs');
-let data = new FormData();
-data.append('name', formData.fullName);
-data.append('tgl_lahir', formData.dateOfBirth);
-data.append('tempat_lahir',formData. placeOfBirth);
-data.append('jenkel', formData.gender);
-data.append('alamat', formData.address);
-data.append('no_telp', formData.phoneNumber);
-data.append('email', formData.email);
-data.append('pendidikan', formData.collage);
-data.append('pekerjaan', formData.job);
-data.append('range_gaji', formData.income);
-data.append('status', formData.status);
-data.append('jumlah_anak', formData.numberOfChildren);
-// data.append('img', fs.createReadStream('/home/miko/Pictures/walpp/2.jpg'));
-data.append('password', formData.password);
-data.append('password_confirmation', formData.passwordConfirmation);
+    let config = {
+      method: 'post',
+      maxBodyLength: Infinity,
+      url: '/register',
+      headers: {},
+      data : data
+    };
 
-let config = {
-  method: 'post',
-  maxBodyLength: Infinity,
-  url: '/register',
-  headers: {},
-  data : data
-};
-
-instance
-.request(config)
-.then((response) => {
-  // console.log(response);
-  if(response.data.error === true){
-    if(response.data.error == 'email'){
-      alert('Email sudah terdaftar!')
-    } else if(response.data.error == 'tgl_lahir'){
-      alert('Format tanggal lahir harus |tahun-bulan-tanggal|')
-    } else if(response.data.error == 'no_telp'){
-      alert('Nomor telepon sudah terdaftar!')
-    }
-    else {
-      alert('Gagal membuat akun')
-    }
-    alert('error')
-    console.log(response.data.message)
-  } else {
-  setIsShowPopupAfterSignUp(true)
-  setIsShow(false)
-  }
-})
-.catch((error) => {
-  console.log(error);
-});
-  }
-
+    instance
+    .request(config)
+    .then((response) => {
+      // console.log(response);
+      if(response.data.error === true){
+        const errorMessage = Object.keys(response.data.message)
+        if(errorMessage.includes('email')){
+          alert('Email sudah terdaftar!')
+          } else if(errorMessage.includes('tgl_lahir')){
+          alert('Format tanggal lahir harus |tahun-bulan-tanggal|')
+        } else if(errorMessage.includes('no_telp')){
+          alert('Nomor telepon sudah terdaftar!')
+        } else if(errorMessage.includes('email') && errorMessage.includes('no_telp')){
+          alert('Email dan nomor telepon sudah terdaftar!')
+        }else {
+          alert('Gagal membuat akun. Coba lagi!')
+        }
+      } else {
+          setIsShowPopupAfterSignUp(true)
+          setIsShow(false)
+      }
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+  } 
+  
   const renderSlide = () => {
     if(slide == 1) {
       return <>
@@ -124,13 +124,16 @@ instance
             eventOnChange={(e)=>setFormData({...formData, placeOfBirth : e.target.value})}
             className={'border-none placeholder:text-white text-white focus:ring-0 py-3 lg:py-2 w-full text-[18px]'}
             />
-      <InputCustom 
-            type='text'
-            placeholder={'Tanggal lahir'} 
-            classNameDiv={'border-2 rounded-full'} 
-            value={formData.dateOfBirth}
-            eventOnChange={(e)=>setFormData({...formData, dateOfBirth : e.target.value})}
-            className={'border-none placeholder:text-white text-white focus:ring-0 py-3 lg:py-2 w-full text-[18px]'}
+      <Datepicker
+            useRange={false} 
+            asSingle={true} 
+            placeholder='Tanggal Lahir' 
+            value={value} onChange={(e)=>{
+              setValue(e)
+              setFormData({...formData,dateOfBirth: e.startDate})
+            }}
+            inputClassName={'bg-transparent border-none focus:ring-0 text-white text-[18px] placeholder:text-white'}
+            containerClassName={'border-2 bg-transparent border-white rounded-full py-1'}
             />
       <span className='flex justify-around'>
         <InputCustom type='radio' eventOnChange={(e)=>setFormData({...formData, gender : e.target.value})} classNameDiv={'w-fit border-2 px-3 py-[11px] lg:py-[6px] rounded-full flex gap-4 font-[600] text-white text-[18px] lg:text-[16px] cursor-pointer'} name={'gender'} id={'laki-laki'} value={'Laki-laki'} labelFor={'laki-laki'} labelValue={'Laki - laki'}/>
