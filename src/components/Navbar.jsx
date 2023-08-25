@@ -134,7 +134,7 @@ const renderMenuNav = () => {
                       return <li 
                                 key={data.title} 
                                 onClick={()=>handleClick(data.event)} 
-                                className='group text-[19px] md:text-[32px] text-white font-[600] my-5 md:my-10 px-3 py-1 flex justify-center items-center gap-4 border-[3.1px] md:border-[4.5px] rounded-md md:rounded-lg hover:bg-slate-200 last:mt-40 md:last:mt-60 last:border-none last:bg-[#C58940] last:p-2 md:last:p-3 relative' 
+                                className='group text-[19px] md:text-[32px] text-white font-[600] my-5 md:my-10 px-3 py-1 flex justify-center items-center gap-4 border-[3.1px] md:border-[4.5px] rounded-md md:rounded-lg hover:bg-white hover:border-white hover:text-[#C58940] last:mt-40 md:last:mt-60 last:border-none last:bg-[#C58940] last:p-2 md:last:p-3 cursor-pointer relative' 
                                 >
                                   {data.title}
                                   {data.icon && 
@@ -145,12 +145,12 @@ const renderMenuNav = () => {
                                                 {data.icon}
                                               </span>
                                               <section 
-                                                className={`invisible group-hover:visible absolute w-full top-9 md:top-14 bg-[#FAF8F1]`}
+                                                className={`invisible group-hover:visible absolute w-full top-9 md:top-14 bg-slate-700`}
                                               >
                                                 {data.submenu.map(sub => {
                                                                     return <span 
                                                                                 key={sub.title} 
-                                                                                className='text-[18px] md:text-[30px] hover:bg-slate-200 block w-full' 
+                                                                                className='text-[18px] md:text-[30px] bg-[#C58940] text-white hover:bg-slate-600 block w-full' 
                                                                                 onClick={()=>handleClick(sub.event)}
                                                                                 >
                                                                                   {sub.title}

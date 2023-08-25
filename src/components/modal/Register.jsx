@@ -108,6 +108,7 @@ const Register = ({setIsShow}) => {
   const renderSlide = () => {
     if(slide == 1) {
       return <>
+      {screenView == 'desktop' && <h1 className='text-[25px] lg:text-[20px] mt-8 lg:mt-0 text-white font-bold'>Informasi Pribadi</h1>}
       <InputCustom 
             type='text'
             placeholder={'Nama lengkap anda'} 
@@ -116,6 +117,7 @@ const Register = ({setIsShow}) => {
             eventOnChange={(e)=>setFormData({...formData, fullName : e.target.value})}
             className={'border-none placeholder:text-white text-white focus:ring-0 py-3 lg:py-2 w-full text-[18px]'}
             />
+            <span className='flex justify-around gap-x-5 lg:gap-x-4'>
       <InputCustom 
             type='text'
             placeholder={'Tempat lahir'} 
@@ -132,14 +134,18 @@ const Register = ({setIsShow}) => {
               setValue(e)
               setFormData({...formData,dateOfBirth: e.startDate})
             }}
+            readOnly={true}
+            popoverClassName="bg-transparent"
             inputClassName={'bg-transparent border-none focus:ring-0 text-white text-[18px] placeholder:text-white'}
-            containerClassName={'border-2 bg-transparent border-white rounded-full py-1'}
+            containerClassName={'border-2 flex w-[38vw] lg:w-[12vw] self-center bg-transparent border-white rounded-full py-1 lg:py-0'}
+            toggleClassName={'hidden'}
             />
+            </span>
       <span className='flex justify-around'>
         <InputCustom type='radio' eventOnChange={(e)=>setFormData({...formData, gender : e.target.value})} classNameDiv={'w-fit border-2 px-3 py-[11px] lg:py-[6px] rounded-full flex gap-4 font-[600] text-white text-[18px] lg:text-[16px] cursor-pointer'} name={'gender'} id={'laki-laki'} value={'Laki-laki'} labelFor={'laki-laki'} labelValue={'Laki - laki'}/>
         <InputCustom type='radio' eventOnChange={(e)=>setFormData({...formData, gender : e.target.value})} classNameDiv={'w-fit border-2 px-3 py-[11px] lg:py-[6px] rounded-full flex gap-4 font-[600] text-white text-[18px] lg:text-[16px] cursor-pointer'} name={'gender'} id={'perempuan'} value={'Perempuan'} labelFor={'perempuan'} labelValue={'Perempuan'}/>
       </span>
-      <textarea value={formData.address} placeholder='Alamat lengkap' onChange={(e)=>setFormData({...formData, address : e.target.value})} className='bg-transparent border-2 border-white rounded-full py-10 text-[18px] text-white placeholder:text-white'></textarea>
+      <textarea value={formData.address} placeholder='Alamat lengkap' onChange={(e)=>setFormData({...formData, address : e.target.value})} className='bg-transparent border-2 border-white rounded-full py-10 lg:py-8 text-[18px] text-white placeholder:text-white scrollbar-hide'></textarea>
       <div className='flex justify-around'>
         <span>
           <Select styles={{
@@ -228,10 +234,13 @@ const Register = ({setIsShow}) => {
           </>
     } else if (slide == 2) {
       return <>
+      {screenView == 'desktop' && <span className='flex gap-x-12'>
+        <ButtonCustom className={'w-min h-min py-2 lg:py-10 px-3 rounded-l-full text-white bg-slate-400'} value={'Kembali'} eventOnClick={()=>setSlide(1)}/>
+        <h1 className='text-[25px] lg:text-[20px] font-bold text-white'>Buat Akun</h1></span>}
         <InputCustom 
             type='email' 
             placeholder={'Masukan email anda'} 
-            classNameDiv={'border-2 rounded-full py-1 lg:py-0'} 
+            classNameDiv={'border-2 rounded-full py-1 lg:py-0 md:mt-40 lg:mt-0'} 
             className={'text-[19px] text-white placeholder:text-white w-full focus:ring-0 border-none'}
             value={formData.email}
             eventOnChange={(e)=>setFormData({...formData, email : e.target.value})}
@@ -273,11 +282,11 @@ const Register = ({setIsShow}) => {
   return (
     <div className='fixed top-0 w-full z-50'>
         <section 
-          className='bg-[#FAF8F1]/40 backdrop-blur-sm p-3 pb-0 w-full md:w-fit md:h-fit overflow-hidden flex flex-col md:flex-row md:justify-evenly md:gap-10 justify-center items-center absolute top-0 bottom-0 left-0 right-0 m-auto rounded-xl z-50'>
+          className='bg-[#FAF8F1]/40 backdrop-blur-sm p-3 pb-0 lg:p-0 w-full md:w-fit md:h-[80vh] overflow-hidden flex flex-col md:flex-row md:justify-evenly md:gap-10 justify-center items-center absolute top-0 bottom-0 left-0 right-0 m-auto rounded-xl z-50'>
             {screenView == 'desktop' && 
             <header 
-              className='relative w-[40vw] bg-white py-1'>
-                <img src={heroImg} alt="Hero" className=''/>
+              className='relative w-[40vw] lg:h-[80vh] bg-white py-1 lg:flex lg:items-center lg:py-0'>
+                <img src={heroImg} alt="Hero" className='lg:h-[70vh] lg:w-full object-cover'/>
                 <h1 className='absolute top-0 bottom-0 flex justify-center items-center mx-auto left-0 right-0'></h1>
             </header>}
             <span 
@@ -286,8 +295,8 @@ const Register = ({setIsShow}) => {
               className='text-[30px] md:text-[35px]'
               />
             </span>
-              {slide == 1 ? <h1 className='text-[25px] lg:text-[20px] text-white font-bold'>Informasi Pribadi</h1> : 
-        <span className='flex gap-x-12 items-center -mt-5 mb-4 self-start'>
+              {slide == 1 ? <h1 className='md:absolute lg:hidden top-2 text-[25px] lg:text-[20px] text-white font-bold md:bg-slate-400/80 md:px-2 md:rounded-full'>Informasi Pribadi</h1> : 
+        <span className='md:absolute lg:hidden top-2 flex gap-x-12 items-center -mt-5 mb-4 md:mt-0 md:left-4 md:gap-x-[24vw] self-start'>
           <ButtonCustom 
               type='button'
               className={'w-min h-min py-1 px-3 rounded-l-full text-white bg-slate-400'} 
@@ -297,13 +306,13 @@ const Register = ({setIsShow}) => {
           <h1 className='text-[25px] lg:text-[20px] font-bold text-white'>Buat Akun</h1>
         </span>}
             <form 
-              className='w-full md:w-[65vw] lg:w-[25vw] flex flex-col gap-5 md:m-10 lg:m-0 lg:mr-10 overflow-y-auto'
+              className='w-full md:w-[65vw] lg:w-[25vw] md:h-[70vh] flex flex-col gap-5 md:m-10 lg:m-0 lg:mr-10 overflow-y-auto overflow-x-hidden scrollbar-hide'
               onSubmit={(e)=>handleSubmit(e)}
               >
             {renderSlide()}
             </form>
         </section>
-        <div className='bg-black opacity-50 w-full h-screen' onClick={()=>setIsShow(false)}></div>
+        <div className='bg-black opacity-50 w-full h-screen' ></div>
     </div>
   )
 }
