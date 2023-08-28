@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import ButtonCustom from '../ui/ButtonCustom'
 
-const Popup = ({title,content,btnCancel,bgClose,classnameBtn,setIsShow,linkTo}) => {
+const Popup = ({title,content,btnCancel,bgClose,classnameBtn,setIsShow,linkTo,eventOnClick}) => {
   return (
     <div 
       className='fixed top-0 w-full z-50'>
@@ -11,11 +11,16 @@ const Popup = ({title,content,btnCancel,bgClose,classnameBtn,setIsShow,linkTo}) 
       {content}
     </section>
       <span className='flex gap-x-5'>
-        <Link to={linkTo}>
-          <ButtonCustom
-                value={'OK'} 
+        {linkTo == '' ? <Link to={linkTo} target='_blank'><ButtonCustom
+                value={'OK'}        
                 className={`${classnameBtn} border-[1.9px] border-[#C58940] py-1 md:py-2 px-3 md:px-4 text-[23px] md:text-[28px]`}/>
-        </Link>
+        </Link> : <Link to={linkTo}>
+          <ButtonCustom
+                value={'OK'}
+                eventOnClick={()=>eventOnClick(false)}
+                className={`${classnameBtn} border-[1.9px] border-[#C58940] py-1 md:py-2 px-3 md:px-4 text-[23px] md:text-[28px]`}/>
+                
+        </Link>}
         {btnCancel && 
                   <ButtonCustom 
                       value={'Cancel'} 

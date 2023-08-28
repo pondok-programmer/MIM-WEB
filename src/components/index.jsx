@@ -7,7 +7,8 @@ import Download from './Download'
 import Feature1 from './Feature1'
 import Feature2 from './Feature2'
 import Event from './Event'
+import Sidebar from './Sidebar'
 import Navbar from './Navbar'
 import Footer from './Footer'
 
-export {About,Article,ArticleCard,Carousel,EventCard,Download,Feature1,Feature2,Event,Navbar,Footer}
+export {About,Article,ArticleCard,Carousel,EventCard,Download,Feature1,Feature2,Sidebar,Event,Navbar,Footer}

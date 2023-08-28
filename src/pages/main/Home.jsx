@@ -1,33 +1,18 @@
-import { About, Article, Download, Event, Feature1, Feature2, Footer } from "../../components"
+import { About, Article, Download, Event, Feature1, Feature2, Footer, Navbar } from "../../components"
 import Carousel from "../../components/Carousel"
 
 const Home = () => {
   return (
     <>
-    <section>
+      <Navbar/>
       <Carousel/>
-    </section>
-    <section>
       <About/>
-    </section>
-    <section>
       <Feature1/>
-    </section>
-    <section>
       <Feature2/>
-    </section>
-    <section>
       <Event/>
-    </section>
-    <section>
       <Article/>
-    </section>
-    <section>
       <Download/>
-    </section>
-    <section>
       <Footer/>
-    </section>
     </>
   )
 }

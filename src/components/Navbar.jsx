@@ -1,6 +1,6 @@
 import BrandImgShort from '../assets/imgs/logo-mim.png'
 import BrandImgLong from '../assets/imgs/logo-mim-long.png'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { HiMenu } from 'react-icons/hi'
 import { IoIosArrowDown, IoIosClose } from 'react-icons/io'
 import { Popup, Register } from './modal'
@@ -11,20 +11,21 @@ const Navbar = () => {
   const [isShowRegister, setIsShowRegister] = useState(false)
   const [scrollPx, setScrollPx] = useState(0)
   const [isShowNav, setIsShowNav] = useState(false)
+  
 
-  const {screenView,isShowPopup,setIsShowPopup,linkTo} = useSteteContext()
+  const {screenView,isShowPopup,setIsShowPopup,linkTo,beranda,tentang,fitur,kajian,artikel,isShowPopupAfterSignUp,setIsShowPopupAfterSignUp} = useSteteContext()
 
   const menuList = [{
     title: 'Beranda',
-    event: 'alert("beranda")',
+    event: 'beranda',
     path: '#'
   },{
     title: 'Tentang MIM',
-    event: 'alert("tentang")',
+    event: 'tentang',
     path: '#about-us'
   },{
     title: 'Fitur',
-    event: 'alert("fitur")',
+    event: 'fitur',
     path: '#feature'
   },{
     title: 'Informasi',
@@ -32,10 +33,12 @@ const Navbar = () => {
     icon : <IoIosArrowDown className='text-[21px] md:text-[32px] lg:text-[27px]'/>,
     submenu: [{
       title: 'Info Kajian',
-      path: '#kajian-info'
+      path: '#kajian-info',
+      event: 'kajian'
     },{
       title: 'Artikel Dakwah',
-      path: '#dakwah-article'
+      path: '#dakwah-article',
+      event: 'artikel'
     }]
   },{
     title: 'Bergabung',
@@ -47,6 +50,16 @@ const handleClick = (e) => {
   if(e == 'join'){
     setIsShowRegister(true)
     setIsOpen(!isOpen)
+  } else if(e == 'beranda'){
+    beranda.current?.scrollIntoView({behavior: 'smooth'})
+  } else if(e == 'tentang'){
+    tentang.current?.scrollIntoView({behavior: 'smooth'})
+  }else if(e == 'fitur'){
+    fitur.current?.scrollIntoView({behavior: 'smooth'})
+  } else if(e == 'kajian'){
+    kajian.current?.scrollIntoView({behavior: 'smooth'})
+  } else if(e == 'artikel'){
+    artikel.current?.scrollIntoView({behavior: 'smooth'})
   }
 }
 
@@ -121,7 +134,7 @@ const renderMenuNav = () => {
                       return <li 
                                 key={data.title} 
                                 onClick={()=>handleClick(data.event)} 
-                                className='group text-[19px] md:text-[32px] text-white font-[600] my-5 md:my-10 px-3 py-1 flex justify-center items-center gap-4 border-[3.1px] md:border-[4.5px] rounded-md md:rounded-lg hover:bg-slate-200 last:mt-40 md:last:mt-60 last:border-none last:bg-[#C58940] last:p-2 md:last:p-3 relative' 
+                                className='group text-[19px] md:text-[32px] text-white font-[600] my-5 md:my-10 px-3 py-1 flex justify-center items-center gap-4 border-[3.1px] md:border-[4.5px] rounded-md md:rounded-lg hover:bg-white hover:border-white hover:text-[#C58940] last:mt-40 md:last:mt-60 last:border-none last:bg-[#C58940] last:p-2 md:last:p-3 cursor-pointer relative' 
                                 >
                                   {data.title}
                                   {data.icon && 
@@ -132,13 +145,13 @@ const renderMenuNav = () => {
                                                 {data.icon}
                                               </span>
                                               <section 
-                                                className={`invisible group-hover:visible absolute w-full top-9 md:top-14 bg-[#FAF8F1]`}
+                                                className={`invisible group-hover:visible absolute w-full top-9 md:top-14 bg-slate-700`}
                                               >
                                                 {data.submenu.map(sub => {
                                                                     return <span 
                                                                                 key={sub.title} 
-                                                                                className='text-[18px] md:text-[30px] hover:bg-slate-200 block w-full' 
-                                                                                onClick={()=>alert('yes')}
+                                                                                className='text-[18px] md:text-[30px] bg-[#C58940] text-white hover:bg-slate-600 block w-full' 
+                                                                                onClick={()=>handleClick(sub.event)}
                                                                                 >
                                                                                   {sub.title}
                                                                             </span>
@@ -194,7 +207,7 @@ const renderMenuNav = () => {
                                                                                     return <span 
                                                                                               key={sub.title} 
                                                                                               className='text-[20px] p-2 hover:bg-slate-200 block w-full' 
-                                                                                              onClick={()=>alert('yes')}
+                                                                                              onClick={()=>handleClick(sub.event)}
                                                                                               >
                                                                                                 {sub.title}
                                                                                               </span>
@@ -217,6 +230,7 @@ const renderMenuNav = () => {
     {renderMenuNav()}
     {isShowRegister && <Register setIsShow={setIsShowRegister}/>}
     {isShowPopup && <Popup bgClose={true} btnCancel={true} linkTo={linkTo.join} title={`Simak ${linkTo.title}`} content={<span className='text-center text-[20px]'><p>Yang berlangsung<p>{linkTo.date}</p> Pada pukul {linkTo.time} WIB</p></span>} setIsShow={setIsShowPopup} classnameBtn={'rounded-lg font-[600] hover:bg-[#C58940] transition-all duration-600 text-[#C58940] hover:text-white'}/>}
+    {isShowPopupAfterSignUp && <Popup title={`Verifikasi Email`} content={<span className='text-center text-[20px]'><p>Lakukan verifikasi email untuk menyelasaikan pembuatan akun.</p></span>} eventOnClick={setIsShowPopupAfterSignUp} setIsShow={setIsShowPopupAfterSignUp} classnameBtn={'rounded-lg font-[600] hover:bg-[#C58940] transition-all duration-600 text-[#C58940] hover:text-white'}/>}
     </>
   )
 }

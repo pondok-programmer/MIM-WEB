@@ -6,5 +6,6 @@ export default defineConfig({
   plugins: [react()],
   server: {
     host : true
-  }
+  },
+  optimizeDeps: { exclude: [ "swiper/types"], },
 })
