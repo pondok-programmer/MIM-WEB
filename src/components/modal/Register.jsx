@@ -90,6 +90,8 @@ const Register = ({setIsShow}) => {
           alert('Format tanggal lahir harus |tahun-bulan-tanggal|')
         } else if(errorMessage.includes('no_telp')){
           alert('Nomor telepon sudah terdaftar!')
+        } else if(errorMessage.includes('password')){
+          alert('Pastikan kata sandi sama!')
         } else if(errorMessage.includes('email') && errorMessage.includes('no_telp')){
           alert('Email dan nomor telepon sudah terdaftar!')
         }else {
